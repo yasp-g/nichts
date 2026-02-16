@@ -10,6 +10,10 @@
     # Add user-specific packages here
   ];
 
+  # Hyprland config
+  xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
+  xdg.configFile."hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
+
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
 
