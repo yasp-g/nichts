@@ -15,10 +15,10 @@ Tracking the transition from the installer's channel-based setup to a modular fl
 ## Phase 1: Minimal Flake Bootstrap
 Get flakes working with the existing config before restructuring.
 
-- [ ] Create `flake.nix` with nixpkgs input pinned to 25.05
-- [ ] Move `configuration.nix` logic into flake's nixosConfigurations
-- [ ] First successful `sudo nixos-rebuild switch --flake .#nixbook`
-- [ ] Remove symlinks from `/etc/nixos/` (no longer needed with flakes)
+- [x] Create `flake.nix` with nixpkgs input (pinned to 25.11)
+- [x] Move `configuration.nix` logic into flake's nixosConfigurations
+- [x] First successful `sudo nixos-rebuild switch --flake .#mbp2015`
+- [x] Remove symlinks from `/etc/nixos/` (no longer needed with flakes)
 
 ## Phase 2: Modular Structure
 Extract reusable pieces into the planned directory layout.
