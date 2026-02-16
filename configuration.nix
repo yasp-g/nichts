@@ -16,7 +16,7 @@
   boot.loader.efi.efiSysMountPoint = "/boot";
 
   # Networking
-  networking.hostName = "nixbook"; # Define your hostname.
+  networking.hostName = "mbp2015";
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
