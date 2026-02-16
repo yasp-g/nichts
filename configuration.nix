@@ -62,6 +62,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "broadcom-sta"
+      "claude-code"
     ];
 
   # Allow insecure packages
@@ -71,19 +72,22 @@
 
   # Essential Packages
   environment.systemPackages = with pkgs; [
-    brightnessctl  # laptop brightness
-    ghostty       # terminal emulator
+    brightnessctl	# laptop brightness
+    claude-code
+    firefox		# browser
+    ghostty		# terminal emulator
     git
-    grim          # screenshot
-    mako          # notifications
+    grim		# screenshot
+    mako		# notifications
     networkmanagerapplet
-    slurp         # region selection
+    neovim
+    slurp		# region selection
     tree
     vim
-    waybar        # status bar
+    waybar		# status bar
     wget
-    wl-clipboard  # clipboard
-    wofi          # app launcher
+    wl-clipboard	# clipboard
+    wofi		# app launcher
   ];
 
   # Enable OpenGL (important for Hyprland on Intel GPU)
