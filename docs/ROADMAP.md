@@ -23,10 +23,12 @@ Get flakes working with the existing config before restructuring.
 ## Phase 2: Modular Structure
 Extract reusable pieces into the planned directory layout.
 
-- [ ] Create `hosts/nixbook/` with `default.nix` and `hardware.nix`
-- [ ] Create `modules/core/` (timezone, locale, users, base packages)
-- [ ] Create `modules/desktop/hyprland.nix` (Hyprland, Waybar, Wofi, greetd)
-- [ ] Verify rebuild still works after restructure
+- [x] Create `hosts/mbp2015/` with `default.nix` and `hardware.nix`
+- [x] Create `modules/core/` (timezone, locale, users, base packages)
+- [x] Create `modules/desktop/hyprland.nix` (Hyprland, Waybar, Wofi, greetd)
+- [x] Create `modules/nixpkgs.nix` (mergeable unfree/insecure package lists)
+- [x] Verify rebuild still works after restructure
+- [x] Delete old monolithic config files
 
 ## Phase 3: Home Manager Integration
 Separate user dotfiles from system config.
