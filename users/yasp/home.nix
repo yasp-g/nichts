@@ -14,6 +14,9 @@
   xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
   xdg.configFile."hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
 
+  # Ghostty config
+  xdg.configFile."ghostty/config".source = ./ghostty/config;
+
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
 
