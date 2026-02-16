@@ -9,7 +9,7 @@
     nixosConfigurations.mbp2015 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
+        ./hosts/mbp2015
       ];
     };
   };
