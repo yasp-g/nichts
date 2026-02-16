@@ -28,6 +28,7 @@
     ghostty            # terminal emulator
     git
     neovim
+    tmux
     tree
     vim
     wget
