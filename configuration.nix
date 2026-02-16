@@ -78,6 +78,7 @@
     ghostty		# terminal emulator
     git
     grim		# screenshot
+    hyprlock		# Hyprland locking
     mako		# notifications
     networkmanagerapplet
     neovim
