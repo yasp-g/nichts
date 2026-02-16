@@ -33,11 +33,8 @@
   # OpenGL for Hyprland
   hardware.graphics.enable = true;
 
-  # Desktop packages
+  # Hyprland packages
   environment.systemPackages = with pkgs; [
-    brightnessctl      # laptop brightness
-    firefox            # browser
-    ghostty            # terminal emulator
     grim               # screenshot
     hyprlock           # screen locking
     mako               # notifications

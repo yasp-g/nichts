@@ -20,9 +20,12 @@
     extraGroups = [ "wheel" "networkmanager" "video" ];
   };
 
-  # Base CLI packages
+  # Base packages
   environment.systemPackages = with pkgs; [
-    claude-code
+    brightnessctl      # laptop brightness
+    claude-code        # AI coding assistant
+    firefox            # browser
+    ghostty            # terminal emulator
     git
     neovim
     tree
