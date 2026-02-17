@@ -38,7 +38,6 @@
 
     # Nix tooling
     nil
-    nixfmt-rfc-style
     statix
 
     # GUI apps
