@@ -22,12 +22,13 @@
 
   # Base packages
   environment.systemPackages = with pkgs; [
-    brightnessctl      # laptop brightness
-    claude-code        # AI coding assistant
-    firefox            # browser
-    ghostty            # terminal emulator
+    brightnessctl   # laptop brightness
+    claude-code     # AI coding assistant
+    firefox         # browser
+    ghostty         # terminal emulator
     git
     neovim
+    obsidian        # markdown notes
     tmux
     tree
     vim
