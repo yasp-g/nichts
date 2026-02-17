@@ -33,10 +33,10 @@ Extract reusable pieces into the planned directory layout.
 ## Phase 3: Home Manager Integration
 Separate user dotfiles from system config.
 
-- [ ] Add home-manager flake input
-- [ ] Create `users/yasp/home.nix` for user-level config
-- [ ] Move user packages and dotfiles to Home Manager
-- [ ] Verify Hyprland config works via Home Manager
+- [x] Add home-manager flake input
+- [x] Create `users/yasp/home.nix` for user-level config
+- [x] Move user packages and dotfiles to Home Manager
+- [x] Verify Hyprland config works via Home Manager
 
 ## Phase 4: Polish & Document
 - [ ] Set up weekly garbage collection
