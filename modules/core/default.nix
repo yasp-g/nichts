@@ -25,19 +25,25 @@
 
   # Base packages
   environment.systemPackages = with pkgs; [
-    brightnessctl      # laptop brightness
-    claude-code        # AI coding assistant
-    firefox            # browser
-    ghostty            # terminal emulator
-    git
-    neovim
-    nil                # nix language server
-    nixfmt-rfc-style   # nix formatter
-    obsidian           # markdown notes
-    statix             # nix linter
+    # CLI utilities
     tmux
     tree
-    vim
     wget
+
+    # Development
+    claude-code
+    git
+    neovim
+    vim
+
+    # Nix tooling
+    nil
+    nixfmt-rfc-style
+    statix
+
+    # GUI apps
+    firefox
+    ghostty
+    obsidian
   ];
 }
