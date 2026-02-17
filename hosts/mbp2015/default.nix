@@ -25,6 +25,11 @@
   allowedUnfreePackages = [ "broadcom-sta" ];
   allowedInsecurePackages = [ "broadcom-sta-6.30.223.271-59-6.12.70" ];
 
+  # Host-specific packages
+  environment.systemPackages = with pkgs; [
+    brightnessctl  # laptop brightness
+  ];
+
   # NixOS release version (do not change after install)
   system.stateVersion = "25.11";
 }
