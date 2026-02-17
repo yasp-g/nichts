@@ -18,6 +18,8 @@
     "hypr/hyprland.conf".source = ./hypr/hyprland.conf;
     "hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
     "ghostty/config".source = ./ghostty/config;
+    "waybar/config.jsonc".source = ./waybar/config.jsonc;
+    "waybar/style.css".source = ./waybar/style.css;
   };
 
   # Neovim

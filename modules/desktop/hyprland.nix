@@ -33,6 +33,11 @@
   # OpenGL for Hyprland
   hardware.graphics.enable = true;
 
+  # Fonts (Nerd Font for waybar icons)
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+
   # Hyprland packages
   environment.systemPackages = with pkgs; [
     grim               # screenshot
