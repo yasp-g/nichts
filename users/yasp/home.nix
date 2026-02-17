@@ -17,6 +17,18 @@
   # Ghostty config
   xdg.configFile."ghostty/config".source = ./ghostty/config;
 
+  # Neovim
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    extraConfig = ''
+      set tabstop=4
+      set shiftwidth=4
+      set expandtab
+      set number
+    '';
+  };
+
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
 
