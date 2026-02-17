@@ -2,20 +2,23 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "yasp";
-  home.homeDirectory = "/home/yasp";
+  home = {
+    username = "yasp";
+    homeDirectory = "/home/yasp";
+    stateVersion = "25.11"; # Do not change after initial setup
 
-  # User packages (not system-wide)
-  home.packages = with pkgs; [
-    # Add user-specific packages here
-  ];
+    # User packages (not system-wide)
+    packages = with pkgs; [
+      # Add user-specific packages here
+    ];
+  };
 
-  # Hyprland config
-  xdg.configFile."hypr/hyprland.conf".source = ./hypr/hyprland.conf;
-  xdg.configFile."hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
-
-  # Ghostty config
-  xdg.configFile."ghostty/config".source = ./ghostty/config;
+  # Config files
+  xdg.configFile = {
+    "hypr/hyprland.conf".source = ./hypr/hyprland.conf;
+    "hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
+    "ghostty/config".source = ./ghostty/config;
+  };
 
   # Neovim
   programs.neovim = {
@@ -31,7 +34,4 @@
 
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
-
-  # Home Manager release version (do not change after initial setup)
-  home.stateVersion = "25.11";
 }

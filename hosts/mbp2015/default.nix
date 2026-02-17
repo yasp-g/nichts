@@ -9,17 +9,23 @@
   ];
 
   # Boot loader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+    };
+    # Broadcom WiFi
+    kernelModules = [ "wl" ];
+    extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  };
 
-  # Hostname
   networking.hostName = "mbp2015";
 
   # Broadcom WiFi (requires unfree drivers)
   hardware.enableRedistributableFirmware = true;
-  boot.kernelModules = [ "wl" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   # Hardware-specific unfree/insecure packages
   allowedUnfreePackages = [ "broadcom-sta" ];

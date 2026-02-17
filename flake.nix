@@ -16,9 +16,11 @@
         ./hosts/mbp2015
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.yasp = import ./users/yasp/home.nix;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.yasp = import ./users/yasp/home.nix;
+          };
         }
       ];
     };
