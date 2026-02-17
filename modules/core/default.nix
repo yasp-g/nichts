@@ -7,7 +7,10 @@
   ];
 
   # Unfree packages needed across all hosts
-  allowedUnfreePackages = [ "claude-code" ];
+  allowedUnfreePackages = [
+    "claude-code"
+    "obsidian"
+  ];
   # Timezone
   time.timeZone = "Europe/Berlin";
 
