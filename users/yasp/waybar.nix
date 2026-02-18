@@ -84,9 +84,9 @@
     }
 
     window#waybar {
-      background-color: rgba(${builtins.substring 1 2 theme.base}${builtins.substring 3 2 theme.base}${builtins.substring 5 2 theme.base}, 0.9);
+      background-color: alpha(${theme.base}, 0.9);
       color: ${theme.text};
-      border-bottom: 2px solid rgba(${builtins.substring 1 2 theme.overlay1}${builtins.substring 3 2 theme.overlay1}${builtins.substring 5 2 theme.overlay1}, 0.3);
+      border-bottom: 2px solid alpha(${theme.overlay1}, 0.3);
     }
 
     #workspaces button {
@@ -99,11 +99,11 @@
 
     #workspaces button.active {
       color: ${theme.text};
-      background: rgba(${builtins.substring 1 2 theme.overlay1}${builtins.substring 3 2 theme.overlay1}${builtins.substring 5 2 theme.overlay1}, 0.2);
+      background: alpha(${theme.overlay1}, 0.2);
     }
 
     #workspaces button:hover {
-      background: rgba(${builtins.substring 1 2 theme.overlay1}${builtins.substring 3 2 theme.overlay1}${builtins.substring 5 2 theme.overlay1}, 0.1);
+      background: alpha(${theme.overlay1}, 0.1);
     }
 
     #window {
