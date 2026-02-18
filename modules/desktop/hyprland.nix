@@ -41,6 +41,7 @@
   # Hyprland packages
   environment.systemPackages = with pkgs; [
     grim               # screenshot
+    hypridle           # idle management
     hyprlock           # screen locking
     mako               # notifications
     networkmanagerapplet

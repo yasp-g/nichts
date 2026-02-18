@@ -1,0 +1,10 @@
+mode=drun
+width=600
+height=400
+location=center
+allow_images=true
+image_size=24
+prompt=
+insensitive=true
+hide_scroll=true
+no_actions=true
