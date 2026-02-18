@@ -4,57 +4,60 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal NixOS configuration for a fleet of machines, currently in early development with a single Intel MacBook Pro (2015) running Hyprland.
+Personal NixOS configuration for a fleet of machines, currently running on an Intel MacBook Pro (2015) with Hyprland.
 
 **Repository location:** `~/nixos-config/`
-
-The configuration files (`configuration.nix`, `hardware-configuration.nix`) are symlinked to `/etc/nixos/` where NixOS expects them. This allows version control in the home directory while NixOS reads from its standard location.
 
 ## Build Commands
 
 ```bash
-# Apply configuration changes (current monolithic setup)
-sudo nixos-rebuild switch
+# Apply configuration changes
+sudo nixos-rebuild switch --flake .#mbp2015
 
-# Future flake-based rebuild (after migration)
-sudo nixos-rebuild switch --flake .#nixbook
-
-# Clean up old generations (Nix keeps all previous versions)
+# Clean up old generations manually (automatic weekly GC is configured)
 nix-collect-garbage -d
+
+# Update flake inputs
+nix flake update
 ```
 
 ## Architecture
 
-**Current State:** Monolithic configuration in `configuration.nix` with hardware in `hardware-configuration.nix`.
-
-**Planned Migration:** Modular flake-based structure:
 ```
-flake.nix                    # Dispatcher defining all hosts
-├── hosts/                   # Machine-specific configs (hardware, drivers)
-│   ├── macbook-2015/
-│   └── mac-mini-m3/
-├── modules/                 # Reusable components
-│   ├── core/               # Shared: timezone, locale, users
-│   ├── desktop/            # Hyprland, Waybar
-│   └── services/           # Docker, NAS, Nginx
-└── users/                  # Home Manager dotfiles
+flake.nix                    # Entry point defining all hosts
+├── hosts/                   # Machine-specific configs
+│   └── mbp2015/            # MacBook Pro 2015
+│       ├── default.nix     # Host config (boot, drivers, hostname)
+│       └── hardware.nix    # Generated hardware config
+├── modules/                 # Reusable NixOS modules
+│   ├── core/               # Shared: timezone, users, base packages, GC
+│   ├── desktop/            # Hyprland, greetd, PipeWire, fonts
+│   └── nixpkgs.nix         # Mergeable unfree/insecure package options
+└── users/                   # Home Manager configs
+    └── yasp/
+        ├── home.nix        # User packages, programs, dotfile mappings
+        ├── hypr/           # Hyprland & hyprlock configs
+        ├── ghostty/        # Terminal config
+        └── waybar/         # Status bar config & styling
 ```
 
 ## Key Configuration Details
 
-- **Desktop:** Hyprland (Wayland tiling WM) with greetd/tuigreet, Waybar, Wofi
+- **Desktop:** Hyprland (Wayland) with greetd/tuigreet, Waybar, Wofi
 - **Terminal:** Ghostty
 - **Audio:** PipeWire with ALSA and PulseAudio bridges
-- **Hardware:** Intel GPU (OpenGL enabled), Broadcom WiFi (requires unfree drivers)
+- **Hardware:** Intel GPU, Broadcom WiFi (unfree drivers)
 - **User:** `yasp` with wheel, networkmanager, video groups
+- **Dotfiles:** Managed via Home Manager's `xdg.configFile`
 
 ## Nix-Specific Gotchas
 
-- **Unadded files are invisible:** Flakes cannot see files not tracked by git (`git add` first)
-- **Unfree packages:** Must be explicitly allowed in `allowUnfreePredicate` (currently: broadcom-sta, claude-code)
-- **Insecure packages:** Some drivers require `permittedInsecurePackages` listing
+- **Unadded files invisible to flakes:** Always `git add` new files before rebuild
+- **Unfree packages:** Use `allowedUnfreePackages` list in the relevant module (merges automatically)
+- **Insecure packages:** Use `allowedInsecurePackages` list (same pattern)
 - **FHS binaries fail:** Standard Linux binaries won't work; use `nix-ld` or find Nix packages
-- **Never change `system.stateVersion`:** This is NOT the NixOS version and should remain at initial install value
+- **Never change `system.stateVersion`:** This is NOT the NixOS version; keep at initial install value
+- **Waybar reload:** Waybar doesn't auto-reload; restart with `pkill waybar && hyprctl dispatch exec waybar`
 
 ## Secrets
 
