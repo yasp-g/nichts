@@ -39,13 +39,38 @@ Separate user dotfiles from system config.
 - [x] Verify Hyprland config works via Home Manager
 
 ## Phase 4: Polish & Document
-- [ ] Set up weekly garbage collection
-- [ ] Update CLAUDE.md to reflect new structure
-- [ ] Clean up commented boilerplate from old config
+- [x] Set up weekly garbage collection
+- [x] Update CLAUDE.md to reflect new structure
+- [ ] ~~Clean up commented boilerplate from old config~~ (skipped for now)
+
+---
+
+## Phase 5: The Bridge (Mac Mini)
+Sync user environment across machines via Home Manager before full OS changes.
+
+- [ ] Install Nix package manager on Mac Mini M3 (macOS)
+- [ ] Set up standalone Home Manager on Mac Mini
+- [ ] Capture existing Mac Mini dotfiles (shell, neovim, git, etc.)
+- [ ] Create `users/yasp/` config from mature Mac Mini setup
+- [ ] Push to shared repo
+- [ ] Pull and apply on MBP - verify "vibe" syncs
+
+## Phase 6: nix-darwin Integration
+Full macOS system management via Nix.
+
+- [ ] Add nix-darwin flake input
+- [ ] Create `hosts/mini/` with macOS system defaults
+- [ ] Move Mac-specific packages to host config
+- [ ] Test rebuild on Mac Mini
+
+## Phase 7: Fleet Expansion
+- [ ] Add Raspberry Pi configuration
+- [ ] Set up remote deployment (push updates over network)
+- [ ] Consider secrets management (agenix/sops-nix)
 
 ---
 
 ## Notes
 - Always `git add` new files before rebuild (flakes can't see untracked files)
 - Test each phase with a rebuild before moving to the next
-- Keep the old `configuration.nix` as backup until Phase 2 is verified
+- Home Manager can run standalone (just user config) or as NixOS/nix-darwin module
