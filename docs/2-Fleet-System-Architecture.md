@@ -10,7 +10,7 @@ This modular structure prevents code duplication by separating hardware-specific
 │   ├── macbook-2015/       # Intel MBP (NixOS)
 │   │   ├── default.nix     # Host-specific imports
 │   │   └── hardware.nix    # Broadcom drivers, CPU tweaks, partitions
-│   └── mac-mini-m3/        # Apple Silicon (macOS + nix-darwin)
+│   └── mini/        # Apple Silicon (macOS + nix-darwin)
 │       └── default.nix     # macOS system defaults
 ├── modules/                # Reusable "Lego Bricks"
 │   ├── core/               # Shared by ALL (Timezone: Berlin, Locale, Users)
