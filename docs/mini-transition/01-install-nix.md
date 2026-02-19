@@ -73,37 +73,6 @@ Key commands to know:
 - `nix profile remove <index>` — Remove a package from your profile
 - `nix-collect-garbage -d` — Remove old generations and free disk space
 
-## Checkpoint: Initialize the Config Repository
-
-Now is a good time to set up the Git repo that will track all your Nix configuration:
-
-- [ ] Create the repo:
-  ```bash
-  mkdir -p ~/.config/nix-config
-  cd ~/.config/nix-config
-  git init
-  ```
-- [ ] Create an initial `flake.nix` scaffold (minimal, just enough to be valid):
-  ```nix
-  {
-    description = "Yasp's multi-machine Nix configuration";
-
-    inputs = {
-      nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    };
-
-    outputs = { self, nixpkgs, ... }: {
-      # darwinConfigurations and homeConfigurations will be added in later phases
-    };
-  }
-  ```
-- [ ] Generate the lock file: `nix flake update`
-- [ ] Add and commit:
-  ```bash
-  git add flake.nix flake.lock
-  git commit -m "feat: initialize nix config flake"
-  ```
-- [ ] Optionally push to GitHub (matches your NixOS config workflow)
 
 ## Notes for Claude Code Agent
 
@@ -119,5 +88,4 @@ Now is a good time to set up the Git repo that will track all your Nix configura
 - `nix --version` works in a new terminal
 - Flakes are functional (`nix flake --help` works)
 - Homebrew still works alongside Nix
-- Config repo is initialized with a scaffold `flake.nix`
 - No shell or PATH regressions

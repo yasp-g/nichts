@@ -17,39 +17,39 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 
 | Formula | Status | Nix package name | Notes |
 |---------|--------|-------------------|-------|
-| `aha` | MAYBE | `aha` | Converts ANSI to HTML — niche, low priority |
-| `bind` | MAYBE | `bind` | DNS tools (dig, nslookup) — macOS ships `dig`; may not need Homebrew version |
-| `boost` | MAYBE | `boost` | C++ library — check if anything actively needs it |
+| `aha` | REMOVE | `aha` | Converts ANSI to HTML — niche, low priority |
+| `bind` | REMOVE | `bind` | DNS tools (dig, nslookup) — macOS ships `dig`; may not need Homebrew version |
+| `boost` | REMOVE | `boost` | C++ library — check if anything actively needs it |
 | `cabal-install` | KEEP | `cabal-install` | Haskell package manager — not active now but keeping for future Haskell use |
 | `chafa` | KEEP | `chafa` | Terminal image viewer — used by yazi/tools |
 | `cmake` | KEEP | `cmake` | Build tool — needed for compiling things |
-| `curl` | MAYBE | `curl` | macOS ships curl — may not need Homebrew version |
-| `exercism` | MAYBE | `exercism` | Coding practice platform — remove if not active |
+| `curl` | REMOVE | `curl` | macOS ships curl — may not need Homebrew version |
+| `exercism` | KEEP | `exercism` | Coding practice platform — remove if not active |
 | `fastfetch` | KEEP | `fastfetch` | System info display |
 | `felixkratz/formulae/borders` | DEFERRED | n/a | Window borders — no nixpkgs equivalent; keep in Homebrew brews |
 | `ffmpeg` | KEEP | `ffmpeg` | Media processing |
 | `fzf` | KEEP | `fzf` | Fuzzy finder — essential |
 | `git` | KEEP | `git` | Essential |
-| `git-filter-repo` | MAYBE | `git-filter-repo` | Specialized git history rewriting — remove if rarely used |
+| `git-filter-repo` | KEEP | `git-filter-repo` | Specialized git history rewriting |
 | `glow` | KEEP | `glow` | Markdown viewer in terminal |
 | `gnupg` | KEEP | `gnupg` | GPG for encryption/signing |
-| `hashicorp/tap/terraform` | DEFERRED | n/a | Managed via `tfenv` — see tfenv note below |
+| `hashicorp/tap/terraform` | REMOVE | n/a | tenv manages terraform binaries directly — Homebrew formula is redundant |
 | `haskell-language-server` | KEEP | `haskell-language-server` | Not active now but keeping for future Haskell use |
 | `haskell-stack` | KEEP | `haskell-stack` | Not active now but keeping for future Haskell use |
 | `imagemagick` | KEEP | `imagemagick` | Image manipulation |
 | `jp2a` | KEEP | `jp2a` | JPEG to ASCII — used by terminal tools |
 | `kubernetes-cli` | KEEP | `kubectl` | kubectl — active use with terraform/infra work |
-| `llvm` | MAYBE | `llvm` | Compiler infrastructure — check if anything needs it explicitly |
-| `luarocks` | MAYBE | `luarocks` | Lua package manager — used for Neovim plugins; may be replaced by Nix in Phase 3 |
-| `lynx` | MAYBE | `lynx` | Text browser — low priority, remove if unused |
+| `llvm` | REMOVE | `llvm` | Compiler infrastructure — check if anything needs it explicitly |
+| `luarocks` | KEEP | `luarocks` | Lua package manager — used for Neovim plugins; may be replaced by Nix in Phase 3 |
+| `lynx` | KEEP | `lynx` | Text browser — low priority, remove if unused |
 | `modularml/packages/modular` | DEFERRED | n/a | Mojo language toolkit — no nixpkgs package; keep in Homebrew or manage manually |
 | `neovim` | KEEP | `neovim` | Primary editor |
 | `opencode` | KEEP | `opencode` | AI coding tool — also installed as cask; check for duplication |
 | `pandoc` | KEEP | `pandoc` | Document converter |
 | `powerlevel10k` | DEFERRED | `zsh-powerlevel10k` | Zsh theme — will be managed by Home Manager in Phase 3 |
 | `rsync` | KEEP | `rsync` | File sync — macOS ships old rsync; Homebrew/Nix version is newer |
-| `tbb` | MAYBE | `tbb` | Intel Threading Building Blocks — likely a dep, check `brew uses tbb` |
-| `telnet` | MAYBE | `inetutils` | Network debugging — rarely needed |
+| `tbb` | REMOVE | `tbb` | Intel Threading Building Blocks — likely a dep, check `brew uses tbb` |
+| `telnet` | REMOVE | `inetutils` | Network debugging — rarely needed |
 | `tfenv` | REMOVE | n/a | Replaced by `tenv` (handles both Terraform and OpenTofu) |
 | `tmux` | KEEP | `tmux` | Terminal multiplexer |
 | `tofuenv` | REMOVE | n/a | Replaced by `tenv` |
@@ -58,7 +58,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 | `uv` | KEEP | `uv` | Python package/project manager |
 | `warrensbox/tap/tfswitch` | REMOVE | n/a | Replaced by `tenv` |
 | `tenv` | KEEP | `tenv` | Unified Terraform + OpenTofu version manager — replaces tfenv, tofuenv, tfswitch |
-| `wireshark` | MAYBE | `wireshark` | Network analysis — keep if used for debugging |
+| `wireshark` | KEEP | `wireshark` | Network analysis — keep if used for debugging |
 | `yazi` | KEEP | `yazi` | File manager |
 | `zsh-completions` | DEFERRED | n/a | Will be handled by Home Manager `programs.zsh` in Phase 3 |
 
@@ -85,50 +85,50 @@ All 6 casks are KEEP — small, clean list.
 
 | Application | Install method | Status | Notes |
 |-------------|---------------|--------|-------|
-| `Adobe Acrobat DC` | Direct download | MAYBE | Preview handles most PDFs; remove if not specifically needed |
+| `Adobe Acrobat DC` | Direct download | KEEP | Preview handles most PDFs; remove if not specifically needed |
 | `AeroSpace.app` | Homebrew Cask | KEEP | Window manager — managed via cask above |
-| `AgeClock.app` | Unknown | MAYBE | Decide based on use |
+| `AgeClock.app` | Unknown | REMOVE | Decide based on use |
 | `Anaconda-Navigator.app` | Direct download | REMOVE | Using `uv` for Python now — Anaconda is heavyweight clutter |
 | `Arc.app` | Direct download | KEEP | Browser |
-| `Be Focused.app` | Unknown | MAYBE | Pomodoro timer — keep if actively using |
-| `calibre.app` | Direct download | MAYBE | Ebook management |
+| `Be Focused.app` | Unknown | KEEP |  Pomodoro timer — keep if actively using |
+| `calibre.app` | Direct download | KEEP | Ebook management |
 | `DeepL.app` | Direct download | KEEP | Translation tool |
 | `Developer.app` | Mac App Store | KEEP | Apple Developer resources |
-| `Dia.app` | Direct download | MAYBE | Diagram tool — check if actively used |
+| `Dia.app` | Direct download | REMOVE | Diagram tool — check if actively used |
 | `Discord.app` | Direct download | KEEP | Communication |
 | `Disk Inventory X.app` | Direct download | REMOVE | Keeping GrandPerspective instead |
 | `DisplayLink Manager.app` | Direct download | KEEP | Required if using DisplayLink dock/monitors |
 | `Docker.app` | Direct download | KEEP | Containers |
-| `Element.app` | Direct download | MAYBE | Matrix client — keep if using Matrix |
-| `Exporter.app` | Unknown | MAYBE | Clarify what this exports |
-| `FreeCAD.app` | Direct download | MAYBE | 3D CAD — keep if active use |
+| `Element.app` | Direct download | KEEP | Matrix client — keep if using Matrix |
+| `Exporter.app` | Unknown | REMOVE | Clarify what this exports |
+| `FreeCAD.app` | Direct download | KEEP | 3D CAD — keep if active use |
 | `Ghostty.app` | Homebrew Cask | KEEP | Terminal |
 | `GIMP.app` | Direct download | KEEP | Image editor |
-| `GitHub Desktop.app` | Direct download | MAYBE | Have git CLI and gh — may be redundant |
+| `GitHub Desktop.app` | Direct download | REMOVE | Have git CLI and gh — may be redundant |
 | `Google Chrome.app` | Direct download | KEEP | Browser |
-| `Grammarly for Safari.app` | Mac App Store | MAYBE | Keep if using Grammarly |
+| `Grammarly for Safari.app` | Mac App Store | REMOVE | Keep if using Grammarly |
 | `GrandPerspective.app` | Direct download | KEEP | Disk visualizer |
-| `Hue Sync.app` | Direct download | MAYBE | Philips Hue — keep if have Hue lights |
+| `Hue Sync.app` | Direct download | REMOVE | Philips Hue — keep if have Hue lights |
 | `Ice.app` | Homebrew Cask | KEEP | Menu bar manager |
-| `JetBrains Toolbox.app` | Direct download | MAYBE | Keep if using JetBrains IDEs |
-| `Kindle.app` | Mac App Store | MAYBE | Keep if reading Kindle books |
+| `JetBrains Toolbox.app` | Direct download | REMOVE | Keep if using JetBrains IDEs |
+| `Kindle.app` | Mac App Store | REMOVE | Ebook reader |
 | `logioptionsplus.app` | Direct download | KEEP | Required for Logitech mouse/keyboard |
 | `Microsoft Excel.app` | Mac App Store | KEEP | Office suite |
 | `Microsoft PowerPoint.app` | Mac App Store | KEEP | Office suite |
-| `Microsoft Teams.app` | Direct download | MAYBE | Keep if required for work |
-| `Microsoft To Do.app` | Mac App Store | MAYBE | Have Notion — may be redundant |
+| `Microsoft Teams.app` | Direct download | KEEP | Keep if required for work |
+| `Microsoft To Do.app` | Mac App Store | REMOVE | Have Notion — may be redundant |
 | `Microsoft Word.app` | Mac App Store | KEEP | Office suite |
-| `Notion Calendar.app` | Direct download | MAYBE | Decide vs other calendar apps |
+| `Notion Calendar.app` | Direct download | REMOVE | Decide vs other calendar apps |
 | `Notion.app` | Direct download | KEEP | Notes/productivity |
 | `Numbers.app` | Built-in | KEEP | Built-in |
 | `Obsidian.app` | Direct download | KEEP | Notes |
-| `OneDrive.app` | Mac App Store | MAYBE | Keep if using OneDrive for storage |
+| `OneDrive.app` | Mac App Store | REMOVE | Not using OneDrive |
 | `OnVUE.app` | Direct download | REMOVE | Online proctoring — exam-specific, can reinstall if needed |
-| `OnyX.app` | Direct download | MAYBE | macOS maintenance — rarely needed |
-| `Opera.app` | Direct download | MAYBE | Extra browser — probably not needed alongside Arc + Chrome |
+| `OnyX.app` | Direct download | REMOVE | macOS maintenance — rarely needed |
+| `Opera.app` | Direct download | KEEP | Extra browser — probably not needed alongside Arc + Chrome |
 | `Pages.app` | Built-in | KEEP | Built-in |
-| `PDFsam Basic.app` | Direct download | MAYBE | PDF split/merge — Preview/Acrobat may cover this |
-| `Pokemon Reborn` | Direct download | MAYBE | Game — keep if playing |
+| `PDFsam Basic.app` | Direct download | KEEP | PDF split/merge — Preview/Acrobat may cover this |
+| `Pokemon Reborn` | Direct download | KEEP | Game — keep if playing |
 | `Postman.app` | Direct download | KEEP | API testing |
 | `ProtonVPN.app` | Direct download | KEEP | VPN |
 | `Python 2.7` | Direct download | REMOVE | Ancient — remove |
@@ -136,24 +136,24 @@ All 6 casks are KEEP — small, clean list.
 | `Python 3.7` | Direct download | REMOVE | Ancient — remove |
 | `Python 3.10` | Direct download | REMOVE | Old — using uv; remove |
 | `Python 3.11` | Direct download | REMOVE | Old — using uv; remove |
-| `Raspberry Pi Imager.app` | Direct download | MAYBE | Keep if working with Pi hardware |
-| `Research.app` | Unknown | MAYBE | Identify what this is |
+| `Raspberry Pi Imager.app` | Direct download | KEEP | Keep if working with Pi hardware |
+| `Research.app` | Unknown | REMOVE | Identify what this is |
 | `Safari.app` | Built-in | KEEP | Built-in |
-| `sqlectron.app` | Direct download | MAYBE | SQL client — keep if actively used |
+| `sqlectron.app` | Direct download | KEEP | SQL client — keep if actively used |
 | `Stats.app` | Homebrew Cask | KEEP | Menu bar stats |
 | `Steam.app` | Direct download | KEEP | Gaming |
-| `TeamViewerHost.app` | Direct download | MAYBE | Remote access — keep if needed |
-| `VNC Viewer.app` | Direct download | MAYBE | Remote desktop |
+| `TeamViewerHost.app` | Direct download | KEEP | Remote access — keep if needed |
+| `VNC Viewer.app` | Direct download | KEEP | Remote desktop |
 | `Visual Studio Code.app` | Direct download | KEEP | Keeping alongside Zed and Neovim for now |
-| `WD Discovery` | Direct download | MAYBE | Keep if using WD external drives |
-| `WD Drive Utilities.app` | Direct download | MAYBE | Keep if using WD external drives |
-| `WD Drive Utilities Uninstaller.app` | Direct download | REMOVE | Uninstaller utility — remove after WD decision |
+| `WD Discovery` | Direct download | KEEP | Keep if using WD external drives |
+| `WD Drive Utilities.app` | Direct download | KEEP | Keep if using WD external drives |
+| `WD Drive Utilities Uninstaller.app` | Direct download | KEEP | Uninstaller utility — remove after WD decision |
 | `WhatsApp.app` | Direct download | KEEP | Messaging |
 | `Xcode.app` | Mac App Store | KEEP | Required for macOS development |
 | `Zed.app` | Direct download | KEEP | Editor — actively configured |
 | `zoom.us.app` | Direct download | KEEP | Video calls |
 
-**Clear REMOVEs:** Anaconda-Navigator, Disk Inventory X, OnVUE, Python 2.7/3.6/3.7/3.10/3.11, WD Drive Utilities Uninstaller
+**Clear REMOVEs:** Anaconda-Navigator, Disk Inventory X, OnVUE, Python 2.7/3.6/3.7/3.10/3.11
 
 ---
 
@@ -181,6 +181,10 @@ All 6 casks are KEEP — small, clean list.
 | `~/.config/exercism/` | Exercism | — | UNMANAGED | Exercism CLI config |
 | `~/.nvm/` | NVM | — | UNMANAGED | Node version manager — replace with Nix in Phase 3 |
 | `~/.gemini_aliases` | Gemini tools | — | SKIPPED | Removed 2026-02-18 — no longer used, no API keys |
+
+**Hardcoded path audit (2026-02-19):** No critical configs have hardcoded `/Users/JasperG` paths. Minor findings:
+- `~/.config/exercism/user.json` — hardcoded workspace path; update when migrating exercism config in Phase 3
+- `~/.config/configstore/firebase-tools.json`, `~/.config/github-copilot/symbolDatabaseLookup.json`, `~/.config/MakerBot/`, `~/.config/octave/` — auto-generated files, no action needed
 
 **Flags:**
 - `~/.nvm/` — NVM is not Nix-native; Phase 3 will replace with `programs.node` or shell-managed nix devShells
@@ -213,19 +217,19 @@ All 6 casks are KEEP — small, clean list.
   - `NVM_DIR=$HOME/.nvm` (Node version manager)
   - `HOMEBREW_PREFIX=/opt/homebrew`
 - **PATH entries to preserve:**
-  - `$HOME/.tfenv/bin` (Terraform version manager)
   - `$HOME/.luarocks/bin` (Lua packages)
   - `$MODULAR_HOME/pkg/packages.modular.com_mojo/bin` (Mojo)
   - NVM path (added dynamically by nvm.sh)
+  - Note: `$HOME/.tfenv/bin` will be replaced by tenv in Phase 2
 - **Shell plugins:** FZF integration (`fzf --zsh`), Zsh completions via Homebrew
-- **Sourced files:** `~/.p10k.zsh`, `~/.gemini_aliases` (if exists), NVM scripts
+- **Sourced files:** `~/.p10k.zsh`, NVM scripts
 
 ---
 
 ## Disk Usage Baseline
 
 ```
-Date: 2026-02-18
+Date: 2026-02-18 (cleanup run 2026-02-19)
 Total disk: 460 GiB
 Used: 15 GiB
 Available: 36 GiB
@@ -237,8 +241,8 @@ Capacity: 30%
 ~/Movies: 376 MB
 ~/Music: 19 GB
 ~/Pictures: 19 GB
-~/Library/Caches: 12 GB
+~/Library/Caches: 10 GB (was 12 GB pre-cleanup)
 /nix/store: N/A (pre-install)
 ```
 
-**Note:** Library/Caches at 12 GB — worth running `brew cleanup --prune=all` before Phase 1 to reclaim space.
+`brew autoremove && brew cleanup --prune=all` run — 2 GB reclaimed from caches.
