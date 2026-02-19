@@ -28,7 +28,7 @@
   networking.networkmanager.enable = true;
 
   # User account
-  users.users.yasp = {
+  users.users.jasper = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" ];
   };

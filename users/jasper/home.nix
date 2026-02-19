@@ -1,4 +1,4 @@
-# Home Manager configuration for yasp
+# Home Manager configuration for jasper (mbp2015 / NixOS)
 { config, pkgs, ... }:
 
 let
@@ -7,8 +7,8 @@ let
 in
 {
   home = {
-    username = "yasp";
-    homeDirectory = "/home/yasp";
+    username = "jasper";
+    homeDirectory = "/home/jasper";
     stateVersion = "25.11"; # Do not change after initial setup
 
     packages = with pkgs; [

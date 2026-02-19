@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # macOS system management (Phase 6)
+    # macOS system management (Phase 4)
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +28,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.yasp = import ./users/yasp/home.nix;
+            users.jasper = import ./users/jasper/home.nix;
           };
         }
       ];
@@ -44,7 +44,7 @@
     #       home-manager = {
     #         useGlobalPkgs = true;
     #         useUserPackages = true;
-    #         users.yasp = import ./users/yasp/home.nix;
+    #         users.jasper = import ./users/jasper/home.nix;
     #       };
     #     }
     #   ];
