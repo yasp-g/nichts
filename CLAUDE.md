@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal NixOS configuration for a fleet of machines, currently running on an Intel MacBook Pro (2015) with Hyprland.
+Personal Nix configuration for two machines:
+- **MacBook Pro 2015** — NixOS with Hyprland (x86_64-linux)
+- **Mac Mini** — macOS with nix-darwin (aarch64-darwin, in progress — see `docs/mini-transition/`)
 
-**Repository location:** `~/nixos-config/`
+**Repository location:** `~/.config/nix-config/`
 
 ## Build Commands
 
@@ -34,7 +36,7 @@ flake.nix                    # Entry point defining all hosts
 │   ├── desktop/            # Hyprland, greetd, PipeWire, fonts
 │   └── nixpkgs.nix         # Mergeable unfree/insecure package options
 └── users/                   # Home Manager configs
-    └── yasp/
+    └── jasper/
         ├── home.nix        # User packages, programs, dotfile mappings
         ├── hypr/           # Hyprland & hyprlock configs
         ├── ghostty/        # Terminal config
@@ -47,7 +49,7 @@ flake.nix                    # Entry point defining all hosts
 - **Terminal:** Ghostty
 - **Audio:** PipeWire with ALSA and PulseAudio bridges
 - **Hardware:** Intel GPU, Broadcom WiFi (unfree drivers)
-- **User:** `yasp` with wheel, networkmanager, video groups
+- **User:** `jasper` with wheel, networkmanager, video groups
 - **Dotfiles:** Managed via Home Manager's `xdg.configFile`
 
 ## Nix-Specific Gotchas
