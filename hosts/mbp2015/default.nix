@@ -32,12 +32,20 @@
   # Broadcom WiFi (requires unfree drivers)
   hardware.enableRedistributableFirmware = true;
 
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
+
   # Hardware-specific unfree/insecure packages
   allowedUnfreePackages = [ "broadcom-sta" ];
   allowedInsecurePackages = [ "broadcom-sta-6.30.223.271-59-6.12.70" ];
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
+    blueman        # Bluetooth manager GUI
     brightnessctl  # laptop brightness
   ];
 
