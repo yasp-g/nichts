@@ -27,7 +27,7 @@
   services.logind = {
     powerKey = "ignore";
     powerKeyLongPress = "poweroff";
-  }
+  };
 
   # Broadcom WiFi (requires unfree drivers)
   hardware.enableRedistributableFirmware = true;
