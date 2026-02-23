@@ -39,6 +39,7 @@
   # Base packages
   environment.systemPackages = with pkgs; [
     # CLI utilities
+    glow
     tmux
     tree
     wget
