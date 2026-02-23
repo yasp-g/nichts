@@ -13,7 +13,10 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    settings.auto-optimise-store = true;
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
   };
 
   # Unfree packages needed across all hosts

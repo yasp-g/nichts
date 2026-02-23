@@ -11,7 +11,6 @@
 
   # Required for nix-darwin
   services.nix-daemon.enable = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Set your hostname
   networking.hostName = "mini";
