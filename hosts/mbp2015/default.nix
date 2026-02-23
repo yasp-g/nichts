@@ -24,9 +24,9 @@
 
   networking.hostName = "mbp2015";
 
-  services.logind = {
-    powerKey = "ignore";
-    powerKeyLongPress = "poweroff";
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+    HandlePowerKeyLongPress = "poweroff";
   };
 
   # Broadcom WiFi (requires unfree drivers)

@@ -13,7 +13,7 @@
 
       modules-left = [ "hyprland/workspaces" "hyprland/window" ];
       modules-center = [ "clock" ];
-      modules-right = [ "pulseaudio" "network" "battery" "tray" ];
+      modules-right = [ "pulseaudio" "bluetooth" "network" "battery" "tray" ];
 
       "hyprland/workspaces" = {
         format = "{icon}";
@@ -71,6 +71,18 @@
         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       };
 
+      bluetooth = {
+        format = "󰂯";
+        format-connected = "󰂱 {device_alias}";
+        format-connected-battery = "󰂱 {device_alias} {device_battery_percentage}%";
+        format-off = "󰂲";
+        tooltip-format = "{controller_alias}\n{num_connections} connected";
+        tooltip-format-connected = "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}";
+        tooltip-format-enumerate-connected = "{device_alias}";
+        tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_battery_percentage}%";
+        on-click = "blueman-manager";
+      };
+
       tray = {
         spacing = 10;
       };
@@ -113,10 +125,15 @@
 
     #clock,
     #battery,
+    #bluetooth,
     #network,
     #pulseaudio,
     #tray {
       padding: 0 10px;
+    }
+
+    #bluetooth.off {
+      color: ${theme.overlay0};
     }
 
     #battery.warning {
