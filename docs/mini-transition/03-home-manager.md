@@ -16,7 +16,7 @@ Home Manager replaces your manually maintained dotfiles with Nix expressions tha
 - [ ] Edit `~/.config/nix-config/flake.nix` to add Home Manager as an input:
   ```nix
   {
-    description = "Yasp's multi-machine Nix configuration";
+    description = "Nichts here to see.";
 
     inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -32,7 +32,7 @@ Home Manager replaces your manually maintained dotfiles with Nix expressions tha
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."yasp" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."jasper" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home.nix ];
       };
@@ -44,15 +44,15 @@ Home Manager replaces your manually maintained dotfiles with Nix expressions tha
   { config, pkgs, ... }:
 
   {
-    home.username = "yasp";  # adjust to actual username
-    home.homeDirectory = "/Users/yasp";  # adjust to actual home dir
+    home.username = "jasper";  # adjust to actual username
+    home.homeDirectory = "/Users/jasper";  # adjust to actual home dir
     home.stateVersion = "24.11";  # set to current stable version at time of setup
 
     programs.home-manager.enable = true;
   }
   ```
 - [ ] Run `nix flake update` to fetch Home Manager
-- [ ] Build and activate: `nix run home-manager -- switch --flake ~/.config/nix-config#yasp`
+- [ ] Build and activate: `nix run home-manager -- switch --flake ~/.config/nix-config#jasper`
 - [ ] Verify it worked: `home-manager --version`
 - [ ] Commit: `git add -A && git commit -m "feat: add home-manager with minimal config"`
 
@@ -69,7 +69,7 @@ If you installed packages imperatively in Phase 2, move them to Home Manager:
     # ... add your packages from Phase 2
   ];
   ```
-- [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#yasp`
+- [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#jasper`
 - [ ] Verify packages still work
 - [ ] Remove imperative installations: `nix profile remove <index>` for each
 - [ ] Verify packages still work after removing from profile (Home Manager now provides them)
@@ -118,7 +118,7 @@ xdg.configFile."some-app/config".source = ./configs/some-app-config;
 ```
 
 **After migrating each file:**
-- [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#yasp`
+- [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#jasper`
 - [ ] Verify the generated file is correct: `cat <config-file>` and compare to backup
 - [ ] Verify the application works with the new config
 - [ ] Commit: `git commit -m "feat(home): manage <app> config via home-manager"`

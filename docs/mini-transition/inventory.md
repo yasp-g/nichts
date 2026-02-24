@@ -4,7 +4,7 @@ Populated during Phase 0 (2026-02-18). Updated as packages/configs are migrated.
 
 **Machine:** Mac mini (Apple Silicon, arm64)
 **macOS:** 26.2
-**User:** JasperG (note: different from `yasp` on the MacBook Pro — update nix config accordingly)
+**User:** jasper
 **Shell:** `/bin/zsh`
 
 ---
@@ -182,7 +182,7 @@ All 6 casks are KEEP — small, clean list.
 | `~/.nvm/` | NVM | — | UNMANAGED | Node version manager — replace with Nix in Phase 3 |
 | `~/.gemini_aliases` | Gemini tools | — | SKIPPED | Removed 2026-02-18 — no longer used, no API keys |
 
-**Hardcoded path audit (2026-02-19):** No critical configs have hardcoded `/Users/JasperG` paths. Minor findings:
+**Hardcoded path audit (2026-02-19):** No critical configs have hardcoded `/Users/jasper` paths. Minor findings:
 - `~/.config/exercism/user.json` — hardcoded workspace path; update when migrating exercism config in Phase 3
 - `~/.config/configstore/firebase-tools.json`, `~/.config/github-copilot/symbolDatabaseLookup.json`, `~/.config/MakerBot/`, `~/.config/octave/` — auto-generated files, no action needed
 

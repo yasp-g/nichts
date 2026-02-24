@@ -79,7 +79,7 @@ Two sources are trying to manage the same file. Common cause: a dotfile exists t
 ```bash
 # Back up and remove the conflicting file
 mv ~/.gitconfig ~/.config-backup/gitconfig.bak
-home-manager switch --flake ~/.config/nix-config#yasp
+home-manager switch --flake ~/.config/nix-config#jasper
 ```
 
 ### Shell broken after Home Manager takes over .zshrc
@@ -87,10 +87,10 @@ home-manager switch --flake ~/.config/nix-config#yasp
 ```bash
 # In your working terminal, roll back:
 home-manager generations  # list generations
-home-manager switch --flake ~/.config/nix-config#yasp  # after fixing the config
+home-manager switch --flake ~/.config/nix-config#jasper  # after fixing the config
 
 # Or activate the previous generation directly:
-/nix/var/nix/profiles/per-user/yasp/home-manager-<N>-link/activate
+/nix/var/nix/profiles/per-user/jasper/home-manager-<N>-link/activate
 ```
 
 ### Home Manager can't find a module

@@ -18,7 +18,7 @@ home-manager generations
 /nix/var/nix/profiles/per-user/<username>/home-manager-<N>-link/activate
 
 # Or fix your config and rebuild
-home-manager switch --flake ~/.config/nix-config#yasp
+home-manager switch --flake ~/.config/nix-config#jasper
 ```
 
 **What this rolls back:** Dotfiles, user-level packages, shell config, anything in `home.nix`.

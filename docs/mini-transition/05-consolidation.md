@@ -54,7 +54,7 @@ Your MacBook Pro currently uses channels. To bring it into the shared flake:
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.yasp = import ./hosts/macbook-pro/home.nix;
+        home-manager.users.jasper = import ./hosts/macbook-pro/home.nix;
       }
     ];
   };

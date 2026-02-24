@@ -16,7 +16,7 @@ nix-darwin is the macOS equivalent of NixOS's `configuration.nix`. It manages sy
 - [ ] Edit `~/.config/nix-config/flake.nix`:
   ```nix
   {
-    description = "Yasp's multi-machine Nix configuration";
+    description = "Nichts here to see.";
 
     inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -45,7 +45,7 @@ nix-darwin is the macOS equivalent of NixOS's `configuration.nix`. It manages sy
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.yasp = import ./home.nix;  # adjust username
+            home-manager.users.jasper = import ./home.nix;  # adjust username
           }
         ];
       };
