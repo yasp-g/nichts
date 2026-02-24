@@ -20,6 +20,7 @@ in
   xdg.configFile = {
     "hypr/hyprland.conf".source = ./hypr/hyprland.conf;
     "hypr/hypridle.conf".source = ./hypr/hypridle.conf;
+    "wallpapers".source = ./wallpapers;
     "wofi/config".source = ./wofi/config;
   }
   // (import ./hyprlock.nix { inherit theme; })
