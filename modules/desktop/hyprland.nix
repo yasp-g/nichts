@@ -46,8 +46,11 @@
     mako               # notifications
     networkmanagerapplet
     slurp              # region selection
+    swww               # animated wallpaper daemon
     waybar             # status bar
     wl-clipboard       # clipboard
     wofi               # app launcher
+    xfce.thunar        # file manager
+    yazi               # terminal file manager
   ];
 }
