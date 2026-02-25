@@ -74,7 +74,7 @@ xdg.configFile."some-app/config".source = ./configs/some-app-config;
 | `.gitconfig` | `programs.git` | ☑ | ☑ | ☑ | ☐ |
 | `.ssh/config` | `programs.ssh` | ☐ | ☐ | ☐ | ☐ |
 | `~/.config/yazi/` | `programs.yazi` | ☐ | ☐ | ☐ | ☐ |
-| `~/.config/nvim/` | `programs.neovim` or `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |
+| `~/.config/nvim/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
 | `~/.config/aerospace/` | `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |
 | `~/.config/zed/` | `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |
 | `~/.config/gh/` | `programs.gh` | ☐ | ☐ | ☐ | ☐ |

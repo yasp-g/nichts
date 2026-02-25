@@ -8,6 +8,13 @@
 
   programs.home-manager.enable = true;
 
+  # Neovim — full Lua config sourced from repo
+  home.sessionVariables.EDITOR = "nvim";
+  xdg.configFile."nvim" = {
+    source = ./common/nvim;
+    recursive = true;
+  };
+
   programs.git = {
     enable = true;
     lfs.enable = true;

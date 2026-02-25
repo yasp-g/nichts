@@ -29,15 +29,5 @@ in
   # Waybar with systemd service for auto-restart
   programs.waybar = import ./hyprland/waybar.nix { inherit theme; };
 
-  # Neovim
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    extraConfig = ''
-      set tabstop=4
-      set shiftwidth=4
-      set expandtab
-      set number
-    '';
-  };
+
 }
