@@ -171,19 +171,19 @@ nix path-info --store https://cache.nixos.org nixpkgs#<package>
 
 After CLI migration is complete, uninstall packages marked REMOVE in the inventory:
 
-- [ ] `brew uninstall aha bind boost curl llvm tbb telnet tfenv tofuenv`
-- [ ] `brew untap hashicorp/tap` (if no other formulas from this tap)
-- [ ] `brew untap warrensbox/tap` (if no other formulas from this tap)
-- [ ] `brew autoremove`
-- [ ] `brew cleanup --prune=all`
-- [ ] Commit inventory updates
+- [x] `brew uninstall aha bind boost curl llvm tbb telnet tfenv tofuenv`
+- [x] `brew uninstall hashicorp/tap/terraform && brew untap hashicorp/tap`
+- [x] `brew uninstall warrensbox/tap/tfswitch && brew untap warrensbox/tap`
+- [x] `brew uninstall jq ghc lua grep` (leftover leaves not in KEEP list)
+- [x] `brew autoremove`
+- [x] `brew cleanup --prune=all`
 
 ## Progress Tracking
 
-After each session, update:
-- [ ] Total Homebrew formulas remaining: ___
-- [ ] Total Home Manager packages: ___
-- [ ] Any packages deferred or problematic: ___
+- Total Homebrew formula leaves remaining: 4 (borders, modular, powerlevel10k, zsh-completions — all DEFERRED)
+- Total Home Manager packages: 29
+- Packages deferred: borders (no nixpkgs), modular (no nixpkgs), powerlevel10k (Phase 3), zsh-completions (Phase 3)
+- Packages dropped: jp2a (broken on aarch64-darwin, not needed)
 
 ## Notes for Claude Code Agent
 
