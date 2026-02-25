@@ -73,6 +73,13 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Alternatives considered:** Keep the entries in `extraConfig` even though nbdime isn't installed
 **Rationale:** `nbdime` isn't currently installed, so the entries (`git-nbdiffdriver`, `git-nbmergedriver`, `git-nbdifftool`, `git-nbmergetool`) are inert. Dropping them keeps the config clean. If Jupyter notebook diffing is needed again, add `nbdime` as a package and re-add the git config entries together in one step.
 
+### Neovim: xdg.configFile + home.packages, Not programs.neovim
+**Date:** 2026-02-25
+**Phase:** 3
+**Decision:** Manage neovim config with `xdg.configFile` and keep `neovim` in `home.packages`, rather than using the `programs.neovim` HM module. `lazy-lock.json` is excluded from the repo — lazy.nvim generates it at runtime.
+**Alternatives considered:** `programs.neovim` with `extraLuaConfig` or wrapping plugins via Nix
+**Rationale:** The existing config is a full Lua setup with lazy.nvim managing plugins. `programs.neovim` adds the neovim package itself, which conflicts with the one in `home.packages`. It also encourages Nix-wrapped plugin management, which doesn't fit a lazy.nvim workflow. Simpler to just symlink the Lua files and let lazy.nvim handle plugins. `lazy-lock.json` is a runtime artifact (plugin lock file) that lazy.nvim creates and updates automatically; committing it would cause unnecessary churn.
+
 ---
 
 *Add new decisions above this line.*
