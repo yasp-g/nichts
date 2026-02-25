@@ -101,6 +101,23 @@ Also auto-removed 10 orphaned Homebrew deps (libiconv, lpeg, luajit, luv, popt, 
 
 Auto-removed 61 orphaned Homebrew deps.
 
+#### Batch 3 — 2026-02-25
+
+| Package | Nix name | Added to home | Verified | Brew removed | Final check |
+|---------|----------|---------------|----------|--------------|-------------|
+| cabal-install | `cabal-install` | ✅ | ✅ | ✅ | ✅ |
+| cmake | `cmake` | ✅ | ✅ | ✅ | ✅ |
+| exercism | `exercism` | ✅ | ✅ | ✅ | ✅ |
+| git-filter-repo | `git-filter-repo` | ✅ | ✅ | ✅ | ✅ |
+| haskell-language-server | `haskell-language-server` | ✅ | ✅ | ✅ | ✅ |
+| haskell-stack | `stack` | ✅ | ✅ | ✅ | ✅ |
+| luarocks | `luarocks` | ✅ | ✅ | ✅ | ✅ |
+| lynx | `lynx` | ✅ | ✅ | ✅ | ✅ |
+| pandoc | `pandoc` | ✅ | ✅ | ✅ | ✅ |
+| wireshark | `wireshark` | ✅ | ✅ | ✅ | ✅ |
+
+Auto-removed 16 orphaned Homebrew deps.
+
 #### Batch Template
 
 **Steps:**
