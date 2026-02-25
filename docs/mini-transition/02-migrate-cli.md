@@ -59,22 +59,30 @@ Migrate in small batches (5–10 packages). The pattern for each batch:
 
 ### Pre-Work
 
-- [ ] Review the KEEP list from `reference/inventory.md`
-- [ ] For each KEEP package, verify it exists in nixpkgs:
-  ```bash
-  nix search nixpkgs <package-name>
-  ```
-- [ ] Note any packages that don't exist in nixpkgs or have different names (log in decisions.md)
+- [x] Review the KEEP list from `reference/inventory.md`
+- [x] For each KEEP package, verify it exists in nixpkgs (all 29 KEEP packages confirmed available)
+- [x] Note any packages that don't exist in nixpkgs or have different names:
+  - `kubernetes-cli` (brew) → `kubectl` (nix)
+  - `trash` (brew) → `trash-cli` (nix)
+  - `haskell-stack` (brew) → `stack` (nix)
 
 ### Migration Batches
 
-For each batch, copy this template:
-
-#### Batch N — [Date]
+#### Batch 1 — 2026-02-25
 
 | Package | Nix name | Added to home | Verified | Brew removed | Final check |
 |---------|----------|---------------|----------|--------------|-------------|
-| example | `example` | ☐ | ☐ | ☐ | ☐ |
+| git | `git` | ✅ | ✅ | ✅ | ✅ |
+| neovim | `neovim` | ✅ | ✅ | ✅ | ✅ |
+| fzf | `fzf` | ✅ | ✅ | ✅ | ✅ |
+| tree | `tree` | ✅ | ✅ | ✅ | ✅ |
+| tmux | `tmux` | ✅ | ✅ | ✅ | ✅ |
+| rsync | `rsync` | ✅ | ✅ | ✅ | ✅ |
+| fastfetch | `fastfetch` | ✅ | ✅ | ✅ | ✅ |
+
+Also auto-removed 10 orphaned Homebrew deps (libiconv, lpeg, luajit, luv, popt, tree-sitter@0.25, unibilium, utf8proc, xxhash, yyjson).
+
+#### Batch Template
 
 **Steps:**
 
