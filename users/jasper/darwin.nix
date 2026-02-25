@@ -25,7 +25,7 @@
       glow
       gnupg
       imagemagick
-      jp2a
+      # jp2a (broken)
       kubectl
       opencode
       tenv

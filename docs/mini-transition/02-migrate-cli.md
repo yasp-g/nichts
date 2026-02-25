@@ -82,6 +82,25 @@ Migrate in small batches (5–10 packages). The pattern for each batch:
 
 Also auto-removed 10 orphaned Homebrew deps (libiconv, lpeg, luajit, luv, popt, tree-sitter@0.25, unibilium, utf8proc, xxhash, yyjson).
 
+#### Batch 2 — 2026-02-25
+
+| Package | Nix name | Added to home | Verified | Brew removed | Final check |
+|---------|----------|---------------|----------|--------------|-------------|
+| chafa | `chafa` | ✅ | ✅ | ✅ | ✅ |
+| ffmpeg | `ffmpeg` | ✅ | ✅ | ✅ | ✅ |
+| glow | `glow` | ✅ | ✅ | ✅ | ✅ |
+| gnupg | `gnupg` | ✅ | ✅ | ✅ | ✅ |
+| imagemagick | `imagemagick` | ✅ | ✅ | ✅ | ✅ |
+| jp2a | — | ❌ broken on aarch64-darwin | — | ✅ removed | — |
+| kubernetes-cli | `kubectl` | ✅ | ✅ | ✅ | ✅ |
+| opencode | `opencode` | ✅ | ✅ | ✅ | ✅ |
+| tenv | `tenv` | ✅ | ✅ | ✅ | ✅ |
+| trash | `trash-cli` | ✅ | ✅ | ✅ | ✅ |
+| uv | `uv` | ✅ | ✅ | ✅ | ✅ |
+| yazi | `yazi` | ✅ | ✅ | ✅ | ✅ |
+
+Auto-removed 61 orphaned Homebrew deps.
+
 #### Batch Template
 
 **Steps:**

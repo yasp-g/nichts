@@ -37,7 +37,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 | `haskell-language-server` | KEEP | `haskell-language-server` | Not active now but keeping for future Haskell use |
 | `haskell-stack` | KEEP | `haskell-stack` | Not active now but keeping for future Haskell use |
 | `imagemagick` | KEEP | `imagemagick` | Image manipulation |
-| `jp2a` | KEEP | `jp2a` | JPEG to ASCII — used by terminal tools |
+| `jp2a` | REMOVE | `jp2a` | Broken on aarch64-darwin; not needed |
 | `kubernetes-cli` | KEEP | `kubectl` | kubectl — active use with terraform/infra work |
 | `llvm` | REMOVE | `llvm` | Compiler infrastructure — check if anything needs it explicitly |
 | `luarocks` | KEEP | `luarocks` | Lua package manager — used for Neovim plugins; may be replaced by Nix in Phase 3 |
