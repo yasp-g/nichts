@@ -52,6 +52,13 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Alternatives considered:** Reinstalling with different installer options
 **Rationale:** The Determinate installer (Nix 2.33.3) did not enable `nix-command` and `flakes` by default in `nix.conf`, only setting `build-users-group = nixbld`. The new `nix shell` / `nix search` commands require these features. This will be managed by nix-darwin in Phase 4.
 
+### Separate nixpkgs Inputs for NixOS and Darwin
+**Date:** 2026-02-25
+**Phase:** 2
+**Decision:** Use two nixpkgs inputs: `nixpkgs` (`nixos-25.11`) for the NixOS machine and `nixpkgs-darwin` (`nixpkgs-25.11-darwin`) for macOS Home Manager and nix-darwin.
+**Alternatives considered:** Single `nixpkgs-unstable` for everything; single `nixos-25.11` for everything
+**Rationale:** The `nixos-25.11` branch doesn't have pre-built binaries for aarch64-darwin in the binary cache. Using it on macOS causes packages (e.g., `inetutils`) to compile from source, which can fail. The `nixpkgs-25.11-darwin` branch has darwin binaries cached by Hydra. Using `nixpkgs-unstable` everywhere would work but puts the NixOS machine on a rolling release, risking unexpected breakage on `nix flake update`. Two inputs keeps both machines on stable 25.11 with proper binary cache coverage.
+
 ### Skip Imperative nix profile — Go Straight to Home Manager
 **Date:** 2026-02-25
 **Phase:** 2
