@@ -18,6 +18,20 @@
       tmux
       rsync
       fastfetch
+
+      # Batch 2 — daily-use tools
+      chafa
+      ffmpeg
+      glow
+      gnupg
+      imagemagick
+      jp2a
+      kubectl
+      opencode
+      tenv
+      trash-cli
+      uv
+      yazi
     ];
   };
 }
