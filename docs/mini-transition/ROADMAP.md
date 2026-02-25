@@ -36,7 +36,7 @@ Each layer is independent but composable. Adopt them bottom-up, one at a time.
 | Phase | Name | Status | Guide |
 |-------|------|--------|-------|
 | 0 | Audit & Inventory | `DONE` | [phases/00-audit.md](phases/00-audit.md) |
-| 1 | Install Nix | `NOT_STARTED` | [phases/01-install-nix.md](phases/01-install-nix.md) |
+| 1 | Install Nix | `DONE` | [phases/01-install-nix.md](phases/01-install-nix.md) |
 | 2 | Migrate CLI Packages | `NOT_STARTED` | [phases/02-migrate-cli.md](phases/02-migrate-cli.md) |
 | 3 | Set Up Home Manager | `NOT_STARTED` | [phases/03-home-manager.md](phases/03-home-manager.md) |
 | 4 | Introduce nix-darwin | `NOT_STARTED` | [phases/04-nix-darwin.md](phases/04-nix-darwin.md) |

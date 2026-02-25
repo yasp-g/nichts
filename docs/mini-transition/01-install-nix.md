@@ -1,6 +1,6 @@
 # Phase 1: Install Nix
 
-**Status:** `NOT_STARTED`
+**Status:** `DONE`
 **Prerequisites:** Phase 0 complete
 **Estimated time:** 1 session
 **Outcome:** Nix package manager installed and functional with flakes enabled
@@ -11,50 +11,34 @@ Install Nix using the Determinate Systems installer. This creates a `/nix` APFS 
 
 ## Pre-Flight Checks
 
-- [ ] Verify macOS is up to date (or at least stable — don't install mid-OS-update)
-- [ ] Verify Time Machine backup is current
-- [ ] Note current disk usage: `df -h /`
-- [ ] Confirm shell profile locations: check which of `~/.zshrc`, `~/.zprofile`, `~/.zshenv` exist
+- [x] Verify macOS is up to date (or at least stable — don't install mid-OS-update) — macOS 26.3
+- [x] Verify Time Machine backup is current
+- [x] Note current disk usage: `df -h /` — 460GB total, 61GB free
+- [x] Confirm shell profile locations: `~/.zshrc`, `~/.zprofile`, `~/.zshenv` all exist
 
 ## Installation Checklist
 
-- [ ] Install Nix via Determinate Systems installer:
-  ```bash
-  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-  ```
-- [ ] **Open a new terminal** (required for PATH changes to take effect)
-- [ ] Verify installation: `nix --version`
-- [ ] Verify flakes are enabled: `nix flake --help` should work without errors
-- [ ] Verify the daemon is running: `sudo launchctl list | grep nix`
-- [ ] Check the APFS volume was created: `diskutil list | grep -i nix`
-- [ ] Verify the Nix store works: `nix-shell -p hello --run hello`
+- [x] Install Nix via Determinate Systems installer
+- [x] **Open a new terminal** (sourced nix-daemon.sh in existing session)
+- [x] Verify installation: `nix --version` — Nix 2.33.3
+- [x] Verify flakes are enabled: `nix flake --help` works
+- [x] Verify the daemon is running: `org.nixos.nix-daemon` active
+- [x] Check the APFS volume was created: `Nix Store` APFS volume present
+- [x] Verify the Nix store works: `nix-shell -p hello --run hello` — "Hello, world!"
 
 ## Post-Install Configuration
 
-- [ ] Review what the installer added to your shell profile:
-  ```bash
-  cat ~/.zshrc  # or ~/.zshenv / ~/.zprofile — check all
-  ```
-- [ ] Note the exact line(s) added (you'll need to account for these when Home Manager takes over shell config)
-- [ ] Verify PATH ordering — Nix paths should come before Homebrew:
-  ```bash
-  echo $PATH | tr ':' '\n' | head -20
-  ```
-  Expected: `/nix/...` paths appear before `/opt/homebrew/...` paths
-- [ ] Test a basic `nix shell` invocation:
-  ```bash
-  nix shell nixpkgs#ripgrep --command rg --version
-  ```
-- [ ] Test `nix search`:
-  ```bash
-  nix search nixpkgs ripgrep
-  ```
+- [x] Review what the installer added to your shell profile — no user-level changes; Determinate installer uses system-level `/etc/zshrc` hook
+- [x] Note the exact line(s) added — system-level sourcing of `/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh`
+- [x] Verify PATH ordering — Nix paths (`~/.nix-profile/bin`, `/nix/var/nix/profiles/default/bin`) before Homebrew (`/opt/homebrew/bin`)
+- [x] Test a basic `nix shell` invocation — `ripgrep 15.1.0` (required manually adding `experimental-features = nix-command flakes` to `/etc/nix/nix.conf`)
+- [x] Test `nix search` — works, found `ripgrep` and related packages
 
 ## Verify Homebrew Coexistence
 
-- [ ] Confirm Homebrew still works: `brew --version`
-- [ ] Confirm a Homebrew-installed tool still works (pick one from your KEEP list)
-- [ ] Confirm no PATH conflicts for tools only in Homebrew
+- [x] Confirm Homebrew still works: `brew --version` — Homebrew 5.0.15
+- [x] Confirm a Homebrew-installed tool still works — `fzf 0.67.0 (Homebrew)`
+- [x] Confirm no PATH conflicts for tools only in Homebrew
 
 ## Understanding What Was Installed
 

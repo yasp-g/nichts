@@ -45,6 +45,13 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Alternatives considered:** Keep one of the existing three; manage specific Terraform versions via Nix overlays
 **Rationale:** All three tools were installed simultaneously, creating redundancy. `tenv` handles both Terraform and OpenTofu in one tool and is available in nixpkgs, making it the clean declarative choice.
 
+### Manually Enable Experimental Features in nix.conf
+**Date:** 2026-02-25
+**Phase:** 1
+**Decision:** Manually added `experimental-features = nix-command flakes` to `/etc/nix/nix.conf`
+**Alternatives considered:** Reinstalling with different installer options
+**Rationale:** The Determinate installer (Nix 2.33.3) did not enable `nix-command` and `flakes` by default in `nix.conf`, only setting `build-users-group = nixbld`. The new `nix shell` / `nix search` commands require these features. This will be managed by nix-darwin in Phase 4.
+
 ---
 
 *Add new decisions above this line.*
