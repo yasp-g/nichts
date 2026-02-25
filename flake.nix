@@ -28,13 +28,19 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.jasper = import ./users/jasper/home.nix;
+            users.jasper = import ./users/jasper/nixos.nix;
           };
         }
       ];
     };
 
-    # macOS hosts (uncomment when ready)
+    # Standalone Home Manager (Phase 2–3, replaced by darwinConfigurations in Phase 4)
+    homeConfigurations.jasper = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      modules = [ ./users/jasper/darwin.nix ];
+    };
+
+    # macOS hosts (uncomment in Phase 4)
     # darwinConfigurations.mini = nix-darwin.lib.darwinSystem {
     #   system = "aarch64-darwin";
     #   modules = [
@@ -44,7 +50,7 @@
     #       home-manager = {
     #         useGlobalPkgs = true;
     #         useUserPackages = true;
-    #         users.jasper = import ./users/jasper/home.nix;
+    #         users.jasper = import ./users/jasper/darwin.nix;
     #       };
     #     }
     #   ];
