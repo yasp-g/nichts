@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -12,11 +13,11 @@
     # macOS system management (Phase 4)
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin }: {
+  outputs = { self, nixpkgs, nixpkgs-darwin, home-manager, nix-darwin }: {
 
     # NixOS hosts
     nixosConfigurations.mbp2015 = nixpkgs.lib.nixosSystem {
@@ -36,7 +37,7 @@
 
     # Standalone Home Manager (Phase 2–3, replaced by darwinConfigurations in Phase 4)
     homeConfigurations.jasper = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      pkgs = nixpkgs-darwin.legacyPackages.aarch64-darwin;
       modules = [ ./users/jasper/darwin.nix ];
     };
 
