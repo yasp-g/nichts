@@ -1,26 +1,84 @@
-# Phase 2: Migrate CLI Packages from Homebrew to Nix
+# Phase 2: Set Up Home Manager & Migrate CLI Packages
 
 **Status:** `NOT_STARTED`
 **Prerequisites:** Phase 1 complete, `reference/inventory.md` has categorized Homebrew formulas
-**Estimated time:** 2–4 sessions (do in batches, not all at once)
-**Outcome:** All KEEP CLI tools installed via Nix, corresponding Homebrew formulas removed
+**Estimated time:** 2–4 sessions
+**Outcome:** Standalone Home Manager running on the Mac mini, all KEEP CLI tools declared in `home.packages`, corresponding Homebrew formulas removed
 
-## Strategy
+## Overview
 
-Migrate in small batches (5–10 packages per session). The pattern for every single package is:
+This phase combines two things that were originally separate:
+
+1. **Set up standalone Home Manager** — add a `homeConfigurations` output to the flake and create a Mac-mini-specific home file
+2. **Migrate CLI packages declaratively** — add packages to `home.packages` instead of using throwaway `nix profile install` commands
+
+The package list you build here carries forward unchanged into Phase 4 (nix-darwin). The only thing that changes later is *how* it's activated — from `home-manager switch` to `darwin-rebuild switch`.
+
+### Why not `nix profile install`?
+
+The original plan was to migrate imperatively with `nix profile install`, then redo the work declaratively in Phase 3. Since the flake already has Home Manager wired up, the extra setup is minimal and all work done here is permanent.
+
+## Part 1: Set Up Standalone Home Manager
+
+### Add a homeConfigurations Output to the Flake
+
+- [ ] Create a Mac-mini-specific home file (e.g., `users/jasper/home-darwin.nix`) with a minimal config:
+  ```nix
+  { config, pkgs, ... }:
+
+  {
+    home.username = "jasper";
+    home.homeDirectory = "/Users/jasper";
+    home.stateVersion = "25.11";
+
+    home.packages = with pkgs; [
+      # Packages will be added here during migration
+    ];
+
+    programs.home-manager.enable = true;
+  }
+  ```
+- [ ] Add a `homeConfigurations` output to `flake.nix` pointing to this file:
+  ```nix
+  homeConfigurations.jasper = home-manager.lib.homeManagerConfiguration {
+    pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    modules = [ ./users/jasper/home-darwin.nix ];
+  };
+  ```
+- [ ] `git add` the new files (flakes can't see unadded files)
+- [ ] Build and activate:
+  ```bash
+  nix run home-manager -- switch --flake ~/.config/nix-config#jasper
+  ```
+- [ ] Verify: `home-manager --version`
+- [ ] Verify: existing tools still work, PATH is not broken
+- [ ] Commit: `feat: add standalone home-manager for mac mini`
+
+### Important Notes
+
+- **Do NOT enable `programs.zsh` or any dotfile management yet.** This phase is packages only. Dotfiles are Phase 3.
+- The existing `users/jasper/home.nix` is NixOS-specific (Linux paths, Hyprland). Don't modify it.
+- If the flake eval fails, nothing is broken — your existing tools are unaffected. Fix the Nix expression and retry.
+
+## Part 2: Migrate CLI Packages
+
+### Strategy
+
+Migrate in small batches (5–10 packages). The pattern for each batch:
 
 ```
-1. Install via Nix
-2. Verify it works (version, basic usage, completions)
-3. Confirm it takes precedence over Homebrew version (check PATH)
-4. Uninstall Homebrew version
-5. Verify again in a new shell
-6. Commit
+1. Add packages to home.packages in home-darwin.nix
+2. Rebuild: home-manager switch --flake ~/.config/nix-config#jasper
+3. Open a new terminal
+4. Verify each package works (which, --version, basic usage)
+5. Uninstall corresponding Homebrew formulas
+6. Verify again in a new shell
+7. Commit
 ```
 
-**Never skip step 2 or step 5.**
+**Never skip verification steps.**
 
-## Pre-Work
+### Pre-Work
 
 - [ ] Review the KEEP list from `reference/inventory.md`
 - [ ] For each KEEP package, verify it exists in nixpkgs:
@@ -28,104 +86,99 @@ Migrate in small batches (5–10 packages per session). The pattern for every si
   nix search nixpkgs <package-name>
   ```
 - [ ] Note any packages that don't exist in nixpkgs or have different names (log in decisions.md)
-- [ ] Decide on management approach — there are two paths:
 
-### Approach A: Imperative (nix profile) — Simpler, Less Declarative
-
-```bash
-nix profile install nixpkgs#ripgrep
-```
-
-Pros: Familiar, quick. Cons: Not tracked in config, not reproducible across machines.
-
-### Approach B: Declarative (Home Manager or flake devShell) — Recommended
-
-Packages are listed in your nix config and installed via `home-manager switch` or a flake.
-This is set up in Phase 3, but you can start building the package list now.
-
-**Recommended hybrid:** Use `nix profile install` for immediate migration, then move the
-package list into Home Manager in Phase 3. The important thing now is getting off Homebrew.
-
-## Migration Checklist Template
+### Migration Batches
 
 For each batch, copy this template:
 
-### Batch N — [Date]
+#### Batch N — [Date]
 
-| Package | In nixpkgs? | Nix name | Installed | Verified | Brew removed | Final check |
-|---------|-------------|----------|-----------|----------|--------------|-------------|
-| example | ✅ | `example` | ☐ | ☐ | ☐ | ☐ |
+| Package | Nix name | Added to home | Verified | Brew removed | Final check |
+|---------|----------|---------------|----------|--------------|-------------|
+| example | `example` | ☐ | ☐ | ☐ | ☐ |
 
-**Steps for each package:**
+**Steps:**
 
-- [ ] `nix profile install nixpkgs#<name>`
-- [ ] Open new terminal
-- [ ] `which <command>` — should show `/nix/...` path
-- [ ] `<command> --version` — should work
-- [ ] Test basic functionality (run a real command you'd normally use)
-- [ ] `brew uninstall <name>`
-- [ ] Open new terminal again
-- [ ] `which <command>` — should still show `/nix/...` path
-- [ ] `<command> --version` — should still work
-
-After each batch:
+- [ ] Add packages to `home.packages` in `home-darwin.nix`
+- [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#jasper`
+- [ ] For each package:
+  - [ ] `which <command>` — should show a `/nix/store/...` path
+  - [ ] `<command> --version` — should work
+  - [ ] Quick functional test
+- [ ] `brew uninstall <formula>` for each migrated package
+- [ ] Open new terminal, verify everything still works
 - [ ] `brew autoremove` to clean orphaned dependencies
-- [ ] Commit any config changes
+- [ ] Commit
 
-## Packages That Need Special Attention
+### Packages That Need Special Attention
 
-### Different names between Homebrew and nixpkgs
-Some packages have different names. Common examples:
-- `gnu-sed` (brew) → `gnused` (nix)
-- `grep` (brew GNU grep) → `gnugrep` (nix)
-- `make` (brew GNU make) → `gnumake` (nix)
-- `findutils` (brew) → `findutils` (nix, but `gfind` vs `find` behavior may differ)
+#### Different names between Homebrew and nixpkgs
+- `kubernetes-cli` (brew) → `kubectl` (nix)
+- `trash` (brew) → `trash-cli` (nix)
+- Other name differences may exist — always check with `nix search`
 
-Always verify the actual binary name and behavior after installing the Nix version.
-
-### Packages that install shell completions
-Some tools install completions (for zsh, bash, etc.). Verify completions still work after switching to the Nix version. If they break, they'll be fixed properly in Phase 3 when Home Manager manages shell config.
-
-### Packages that need to compile from source
-Most nixpkgs packages are pre-built via Hydra's binary cache. If `nix profile install` starts compiling from source, something is off — likely a different system architecture or a package not in the cache. Check:
-```bash
-nix path-info --store https://cache.nixos.org nixpkgs#<package>
-```
-
-### Packages with no nixpkgs equivalent
-For packages that genuinely don't exist in nixpkgs, options are:
-1. Keep them in Homebrew (will be managed declaratively via nix-darwin in Phase 4)
+#### Packages with no nixpkgs equivalent
+For packages that genuinely don't exist in nixpkgs:
+1. Keep them in Homebrew (managed declaratively via nix-darwin in Phase 4)
 2. Write a custom Nix derivation (advanced, save for later)
 3. Reconsider if you actually need the package
 
 Log these in `reference/decisions.md`.
 
-## Packages to NOT Migrate Yet
+#### Packages that install shell completions
+Some tools install completions (for zsh, bash, etc.). Completions may break after switching to the Nix version. Note any issues — they'll be fixed properly in Phase 3 when Home Manager manages shell config.
+
+#### Packages that need to compile from source
+Most nixpkgs packages are pre-built. If `home-manager switch` starts compiling from source, something is off. Check:
+```bash
+nix path-info --store https://cache.nixos.org nixpkgs#<package>
+```
+
+### Packages to NOT Migrate Yet
 
 - **GUI applications** — Stay in Homebrew Cask, managed declaratively in Phase 4
-- **Shell itself** (zsh) — macOS ships zsh; Nix-managing your shell requires careful handling, done in Phase 3
-- **Anything with complex system integration** (e.g., `dnsmasq`, `nginx` if used as a service) — handled in Phase 4 via nix-darwin services
+- **Shell itself** (zsh) — macOS ships zsh; Nix-managing your shell is Phase 3
+- **Powerlevel10k** — Deferred to Phase 3 (Home Manager `programs.zsh`)
+- **zsh-completions** — Deferred to Phase 3
+- **Anything with complex system integration** — handled in Phase 4 via nix-darwin
+- **`felixkratz/formulae/borders`** — No nixpkgs equivalent; stays in Homebrew
+- **`modularml/packages/modular`** — No nixpkgs equivalent; stays in Homebrew
+
+## Part 3: Clean Up REMOVE Packages
+
+After CLI migration is complete, uninstall packages marked REMOVE in the inventory:
+
+- [ ] `brew uninstall aha bind boost curl llvm tbb telnet tfenv tofuenv`
+- [ ] `brew untap hashicorp/tap` (if no other formulas from this tap)
+- [ ] `brew untap warrensbox/tap` (if no other formulas from this tap)
+- [ ] `brew autoremove`
+- [ ] `brew cleanup --prune=all`
+- [ ] Commit inventory updates
 
 ## Progress Tracking
 
 After each session, update:
 - [ ] Total Homebrew formulas remaining: ___
-- [ ] Total Nix profile packages: ___
+- [ ] Total Home Manager packages: ___
 - [ ] Any packages deferred or problematic: ___
 
 ## Notes for Claude Code Agent
 
-- Always open a new terminal (or `exec $SHELL`) after installing/removing packages.
-- If `which` shows a Homebrew path after installing the Nix version, it's a PATH ordering issue — do not edit PATH manually; note it for investigation.
-- If a package behaves differently (different flags, missing features), it may be a version difference. Check `nix eval nixpkgs#<pkg>.version` vs `brew info <pkg>`.
-- Do not rush. It is better to migrate 5 packages correctly than 50 packages with subtle breakage.
+- **Always open a new terminal** (or `exec $SHELL`) after rebuilding or removing packages.
+- If `which` shows a Homebrew path after rebuilding, it's a PATH ordering issue — do not edit PATH manually; note it for investigation.
+- If a package behaves differently (different flags, missing features), check version: `nix eval nixpkgs#<pkg>.version` vs `brew info <pkg>`.
+- Do not rush. Better to migrate 5 packages correctly than 50 with subtle breakage.
 - After removing Homebrew formulas, run `brew autoremove` to clean up orphaned deps.
+- If `home-manager switch` fails, the previous generation is still active. Debug the Nix expression — don't fall back to imperative installs.
+- **Do not enable any HM program modules** (like `programs.git`, `programs.zsh`) in this phase. Only use `home.packages`. Dotfile management is Phase 3.
 - Track everything in the batch checklist above.
 
 ## Completion Criteria
 
-- All KEEP CLI packages from the audit are installed via Nix
+- Standalone Home Manager is functional via the flake
+- All KEEP CLI packages from the audit are declared in `home.packages`
 - Corresponding Homebrew formulas are uninstalled
+- REMOVE packages are uninstalled
 - `brew list --formula` shows only: packages deferred to Phase 4, dependencies of remaining casks, packages with no nixpkgs equivalent
 - All migrated tools verified working in a clean shell
 - No regressions in daily workflow

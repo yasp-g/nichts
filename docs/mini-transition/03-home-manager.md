@@ -1,89 +1,26 @@
-# Phase 3: Set Up Home Manager
+# Phase 3: Migrate Dotfiles & Shell Config
 
 **Status:** `NOT_STARTED`
-**Prerequisites:** Phase 1 complete (Phase 2 can be in progress)
+**Prerequisites:** Phase 2 complete (Home Manager running, packages migrated)
 **Estimated time:** 3–5 sessions
-**Outcome:** Dotfiles and user-level packages managed declaratively via Home Manager
+**Outcome:** Dotfiles and shell configuration managed declaratively via Home Manager
 
 ## Overview
 
-Home Manager replaces your manually maintained dotfiles with Nix expressions that generate and symlink config files. This is the biggest mental model shift in the whole transition: you stop editing dotfiles directly and instead edit `.nix` files that produce dotfiles.
+Home Manager is already running from Phase 2, managing your packages. This phase adds dotfile and shell config management on top of that. This is the biggest mental model shift: you stop editing dotfiles directly and instead edit `.nix` files that produce dotfiles.
 
-## Setup Checklist
-
-### Add Home Manager to the Flake
-
-- [ ] Edit `~/.config/nix-config/flake.nix` to add Home Manager as an input:
-  ```nix
-  {
-    description = "Nichts here to see.";
-
-    inputs = {
-      nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-      home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    outputs = { self, nixpkgs, home-manager, ... }:
-    let
-      system = "aarch64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations."jasper" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ];
-      };
-    };
-  }
-  ```
-- [ ] Create `home.nix` with a minimal starting config:
-  ```nix
-  { config, pkgs, ... }:
-
-  {
-    home.username = "jasper";  # adjust to actual username
-    home.homeDirectory = "/Users/jasper";  # adjust to actual home dir
-    home.stateVersion = "24.11";  # set to current stable version at time of setup
-
-    programs.home-manager.enable = true;
-  }
-  ```
-- [ ] Run `nix flake update` to fetch Home Manager
-- [ ] Build and activate: `nix run home-manager -- switch --flake ~/.config/nix-config#jasper`
-- [ ] Verify it worked: `home-manager --version`
-- [ ] Commit: `git add -A && git commit -m "feat: add home-manager with minimal config"`
-
-### Migrate Packages from nix profile to Home Manager
-
-If you installed packages imperatively in Phase 2, move them to Home Manager:
-
-- [ ] Add packages to `home.nix`:
-  ```nix
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    jq
-    # ... add your packages from Phase 2
-  ];
-  ```
-- [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#jasper`
-- [ ] Verify packages still work
-- [ ] Remove imperative installations: `nix profile remove <index>` for each
-- [ ] Verify packages still work after removing from profile (Home Manager now provides them)
-- [ ] Commit
+**This is the highest-risk phase.** A broken shell config means a broken terminal. Go slowly, one config at a time, and always keep a working terminal open while testing.
 
 ## Dotfile Migration — One Config at a Time
 
-### Order of Migration (recommended, low-risk to high-risk)
+### Order of Migration (low-risk to high-risk)
 
-1. **Git config** (`~/.gitconfig`) — Simple, low risk, has a great HM module
-2. **Starship / shell prompt** — If applicable
-3. **Editor config** — Your editor of choice
-4. **SSH config** (`~/.ssh/config`) — Be careful with keys and secrets
-5. **Shell config** (`~/.zshrc`) — Most complex, do last
+1. **Git config** (`~/.gitconfig`) — Simple, low risk, great HM module
+2. **SSH config** (`~/.ssh/config`) — Manage config only, never commit keys
+3. **Yazi config** (`~/.config/yazi/`) — HM module available
+4. **Neovim config** (`~/.config/nvim/`) — Complex but self-contained
+5. **Other app configs** (Zed, AeroSpace, etc.) — Use `xdg.configFile`
+6. **Shell config** (`~/.zshrc`, `~/.p10k.zsh`) — Most complex, do last
 
 ### For Each Config File
 
@@ -98,6 +35,7 @@ programs.git = {
   enable = true;
   userName = "Your Name";
   userEmail = "your@email.com";
+  lfs.enable = true;
   extraConfig = {
     init.defaultBranch = "main";
     push.autoSetupRemote = true;
@@ -119,27 +57,29 @@ xdg.configFile."some-app/config".source = ./configs/some-app-config;
 
 **After migrating each file:**
 - [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#jasper`
-- [ ] Verify the generated file is correct: `cat <config-file>` and compare to backup
+- [ ] Verify the generated file is correct: compare to backup
 - [ ] Verify the application works with the new config
-- [ ] Commit: `git commit -m "feat(home): manage <app> config via home-manager"`
+- [ ] Commit: `feat(home): manage <app> config via home-manager`
 
-### Migration Template
+### Migration Checklist
 
-| Config | HM Module? | Migrated | Verified | Committed |
-|--------|-----------|----------|----------|-----------|
-| `.gitconfig` | `programs.git` | ☐ | ☐ | ☐ |
-| shell prompt | varies | ☐ | ☐ | ☐ |
-| editor config | varies | ☐ | ☐ | ☐ |
-| `.ssh/config` | `programs.ssh` | ☐ | ☐ | ☐ |
-| `.zshrc` | `programs.zsh` | ☐ | ☐ | ☐ |
-| | | ☐ | ☐ | ☐ |
+| Config | HM Module? | Backed up | Migrated | Verified | Committed |
+|--------|-----------|-----------|----------|----------|-----------|
+| `.gitconfig` | `programs.git` | ☐ | ☐ | ☐ | ☐ |
+| `.ssh/config` | `programs.ssh` | ☐ | ☐ | ☐ | ☐ |
+| `~/.config/yazi/` | `programs.yazi` | ☐ | ☐ | ☐ | ☐ |
+| `~/.config/nvim/` | `programs.neovim` or `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |
+| `~/.config/aerospace/` | `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |
+| `~/.config/zed/` | `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |
+| `~/.config/gh/` | `programs.gh` | ☐ | ☐ | ☐ | ☐ |
+| `.zshrc` / `.p10k.zsh` | `programs.zsh` | ☐ | ☐ | ☐ | ☐ |
 
-## Shell Config Migration (Detailed — Do This Last)
+## Shell Config Migration (Do This Last)
 
-Shell config is the most delicate migration because a broken shell config means a broken terminal.
+Shell config is the most delicate because a broken shell config means a broken terminal.
 
 - [ ] Review current `.zshrc` thoroughly — note every section
-- [ ] Identify: aliases, functions, PATH modifications, sourced files, plugin managers, prompt config, completions
+- [ ] Identify: aliases, functions, PATH modifications, sourced files, prompt config, completions
 - [ ] Migrate to `programs.zsh`:
   ```nix
   programs.zsh = {
@@ -156,22 +96,26 @@ Shell config is the most delicate migration because a broken shell config means 
       # Anything that doesn't have a dedicated HM option
       # goes here as raw shell script
     '';
-
-    # If you use oh-my-zsh:
-    # oh-my-zsh = {
-    #   enable = true;
-    #   plugins = [ "git" "docker" ];
-    #   theme = "robbyrussell";
-    # };
   };
   ```
 - [ ] **Critical:** Ensure the Nix shell hook is preserved. Home Manager usually handles this, but verify after rebuild that `nix` commands still work.
-- [ ] Test in a new terminal — do NOT close your current terminal until the new one works
+- [ ] Test in a **new terminal** — do NOT close your current terminal until the new one works
 - [ ] Verify: PATH is correct, aliases work, completions work, prompt renders correctly
+
+### Shell-Adjacent Decisions
+
+These need to be resolved during shell migration:
+
+- **NVM** (`~/.nvm/`) — Replace with `programs.node` or Nix devShells? Log decision.
+- **Powerlevel10k** — Use HM's `zsh-powerlevel10k` package + source `~/.p10k.zsh`
+- **FZF integration** — Use `programs.fzf.enable = true` (HM handles shell integration)
+- **zsh-completions** — Use `programs.zsh.enableCompletion` (HM handles this)
+- **Luarocks PATH** — Keep in `initExtra` or replace with Nix-managed Lua?
+- **Modular/Mojo PATH** — Keep in `initExtra` (no Nix equivalent)
 
 ## Handling Secrets
 
-Secrets (API keys, tokens, etc.) must NOT go into your Nix config (which is tracked in Git).
+Secrets (API keys, tokens, etc.) must NOT go into your Nix config (tracked in Git).
 
 **Approaches, from simplest to most robust:**
 
@@ -184,50 +128,34 @@ Secrets (API keys, tokens, etc.) must NOT go into your Nix config (which is trac
    Keep `~/.secrets` untracked and manually managed.
 
 2. **agenix or sops-nix:** Encrypted secrets stored in Git, decrypted at activation time.
-   More complex but fully declarative. Consider this for Phase 5 if needed.
+   More complex but fully declarative. Consider for Phase 5 if needed.
 
 3. **macOS Keychain:** For some applications, secrets can stay in the system keychain.
-   Not managed by Nix, but doesn't need to be.
 
 - [ ] Decide on secrets approach (log in `reference/decisions.md`)
 - [ ] Migrate secrets out of any dotfiles before those dotfiles are committed to the Nix config repo
 
-## Shared Config with NixOS Machine
+## Shared Config Planning
 
-Home Manager works identically on NixOS and macOS. Start thinking about what can be shared:
+Home Manager works identically on NixOS and macOS. Start identifying what can be shared:
 
 - [ ] Identify configs that are identical across machines (git, editor, shell aliases)
 - [ ] Identify configs that are machine-specific (paths, hardware-specific settings)
-- [ ] Plan directory structure for shared vs. machine-specific modules:
-  ```
-  nix-config/
-  ├── flake.nix
-  ├── home.nix              # Mac mini specific
-  ├── modules/
-  │   └── home/
-  │       ├── git.nix        # shared
-  │       ├── shell.nix      # shared
-  │       └── editor.nix     # shared
-  └── hosts/
-      ├── mac-mini/
-      └── macbook-pro/       # NixOS config, added later
-  ```
+- [ ] Plan module structure for shared vs. machine-specific config
 - [ ] Don't restructure yet — just plan. Actual consolidation is Phase 5.
 
 ## Notes for Claude Code Agent
 
-- **Always back up before overwriting any dotfile.** Use `~/.config-backup/<filename>` as the backup location.
-- **Do not migrate all dotfiles at once.** One at a time, verify, commit, then proceed.
-- **If a rebuild fails**, the previous generation is still active. Help the user debug the Nix expression rather than reverting.
-- **When writing Nix expressions**, prefer Home Manager modules over raw file management — they handle edge cases and are more maintainable.
-- **Shell config is the highest-risk migration.** Always keep the current terminal open while testing shell changes in a new terminal.
+- **Always back up before overwriting any dotfile.** Use `~/.config-backup/<filename>`.
+- **Do not migrate all dotfiles at once.** One at a time, verify, commit, proceed.
+- **If a rebuild fails**, the previous generation is still active. Debug the Nix expression.
+- **Prefer Home Manager modules** over raw file management — they handle edge cases.
+- **Shell config is the highest-risk migration.** Always keep the current terminal open while testing in a new terminal.
 - **Check `home-manager news`** after updates for relevant changes.
 - After each dotfile migration, verify the application loads the config correctly and behaviors match the previous setup.
 
 ## Completion Criteria
 
-- Home Manager is installed and functional via the flake
-- All user-level packages are declared in `home.nix` (not in `nix profile`)
 - All target dotfiles are managed by Home Manager
 - Shell config works correctly with proper PATH, aliases, completions, and prompt
 - Secrets are handled safely (not committed to Git)

@@ -1,7 +1,7 @@
 # Phase 4: Introduce nix-darwin
 
 **Status:** `NOT_STARTED`
-**Prerequisites:** Phase 1 and Phase 3 complete
+**Prerequisites:** Phases 2 and 3 complete (Home Manager running with packages and dotfiles)
 **Estimated time:** 2–4 sessions
 **Outcome:** System-level macOS config managed declaratively via nix-darwin, with Home Manager integrated as a module
 

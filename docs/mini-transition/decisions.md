@@ -52,6 +52,13 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Alternatives considered:** Reinstalling with different installer options
 **Rationale:** The Determinate installer (Nix 2.33.3) did not enable `nix-command` and `flakes` by default in `nix.conf`, only setting `build-users-group = nixbld`. The new `nix shell` / `nix search` commands require these features. This will be managed by nix-darwin in Phase 4.
 
+### Skip Imperative nix profile — Go Straight to Home Manager
+**Date:** 2026-02-25
+**Phase:** 2
+**Decision:** Set up standalone Home Manager in Phase 2 and migrate CLI packages directly into `home.packages`, rather than using `nix profile install` as a throwaway intermediate step.
+**Alternatives considered:** Imperative migration with `nix profile install` in Phase 2, then move packages into Home Manager in Phase 3
+**Rationale:** The flake already has `home-manager` as an input. The package list (`home.packages = [ ... ]`) is identical whether Home Manager runs standalone or inside nix-darwin, so all work is permanent. The only downside is needing a working HM config before migrating packages, but the setup is minimal. Avoids doing the same work twice.
+
 ---
 
 *Add new decisions above this line.*

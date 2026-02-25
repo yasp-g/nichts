@@ -35,19 +35,19 @@ Each layer is independent but composable. Adopt them bottom-up, one at a time.
 
 | Phase | Name | Status | Guide |
 |-------|------|--------|-------|
-| 0 | Audit & Inventory | `DONE` | [phases/00-audit.md](phases/00-audit.md) |
-| 1 | Install Nix | `DONE` | [phases/01-install-nix.md](phases/01-install-nix.md) |
-| 2 | Migrate CLI Packages | `NOT_STARTED` | [phases/02-migrate-cli.md](phases/02-migrate-cli.md) |
-| 3 | Set Up Home Manager | `NOT_STARTED` | [phases/03-home-manager.md](phases/03-home-manager.md) |
-| 4 | Introduce nix-darwin | `NOT_STARTED` | [phases/04-nix-darwin.md](phases/04-nix-darwin.md) |
-| 5 | Multi-Machine Consolidation | `NOT_STARTED` | [phases/05-consolidation.md](phases/05-consolidation.md) |
+| 0 | Audit & Inventory | `DONE` | [00-audit.md](00-audit.md) |
+| 1 | Install Nix | `DONE` | [01-install-nix.md](01-install-nix.md) |
+| 2 | Home Manager & CLI Packages | `NOT_STARTED` | [02-migrate-cli.md](02-migrate-cli.md) |
+| 3 | Dotfiles & Shell Config | `NOT_STARTED` | [03-home-manager.md](03-home-manager.md) |
+| 4 | Introduce nix-darwin | `NOT_STARTED` | [04-nix-darwin.md](04-nix-darwin.md) |
+| 5 | Multi-Machine Consolidation | `NOT_STARTED` | [05-consolidation.md](05-consolidation.md) |
 
 ## Reference Docs
 
-- [reference/decisions.md](reference/decisions.md) — Architecture decisions log
-- [reference/inventory.md](reference/inventory.md) — Template for audit results
-- [reference/troubleshooting.md](reference/troubleshooting.md) — Common issues and fixes
-- [reference/rollback.md](reference/rollback.md) — How to undo things safely
+- [decisions.md](decisions.md) — Architecture decisions log
+- [inventory.md](inventory.md) — Audit results and package inventory
+- [troubleshooting.md](troubleshooting.md) — Common issues and fixes
+- [rollback.md](rollback.md) — How to undo things safely
 
 ## Rules for the Claude Code Agent
 
