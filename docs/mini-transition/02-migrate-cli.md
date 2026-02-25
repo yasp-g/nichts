@@ -1,6 +1,6 @@
 # Phase 2: Set Up Home Manager & Migrate CLI Packages
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 **Prerequisites:** Phase 1 complete, `reference/inventory.md` has categorized Homebrew formulas
 **Estimated time:** 2–4 sessions
 **Outcome:** Standalone Home Manager running on the Mac mini, all KEEP CLI tools declared in `home.packages`, corresponding Homebrew formulas removed
@@ -22,42 +22,21 @@ The original plan was to migrate imperatively with `nix profile install`, then r
 
 ### Add a homeConfigurations Output to the Flake
 
-- [ ] Create a Mac-mini-specific home file (e.g., `users/jasper/home-darwin.nix`) with a minimal config:
-  ```nix
-  { config, pkgs, ... }:
-
-  {
-    home.username = "jasper";
-    home.homeDirectory = "/Users/jasper";
-    home.stateVersion = "25.11";
-
-    home.packages = with pkgs; [
-      # Packages will be added here during migration
-    ];
-
-    programs.home-manager.enable = true;
-  }
-  ```
-- [ ] Add a `homeConfigurations` output to `flake.nix` pointing to this file:
-  ```nix
-  homeConfigurations.jasper = home-manager.lib.homeManagerConfiguration {
-    pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-    modules = [ ./users/jasper/home-darwin.nix ];
-  };
-  ```
-- [ ] `git add` the new files (flakes can't see unadded files)
-- [ ] Build and activate:
-  ```bash
-  nix run home-manager -- switch --flake ~/.config/nix-config#jasper
-  ```
-- [ ] Verify: `home-manager --version`
-- [ ] Verify: existing tools still work, PATH is not broken
-- [ ] Commit: `feat: add standalone home-manager for mac mini`
+- [x] Create `users/jasper/darwin.nix` (macOS Home Manager config, imports `common.nix`)
+- [x] Create `users/jasper/common.nix` (shared config across all machines)
+- [x] Restructure `users/jasper/`: renamed `home.nix` → `nixos.nix`, moved desktop configs to `hyprland/` and shared configs to `common/`
+- [x] Add `homeConfigurations.jasper` output to `flake.nix` using `nixpkgs-darwin`
+- [x] Add `nixpkgs-darwin` input (`nixpkgs-25.11-darwin`) for macOS binary cache coverage
+- [x] `git add` and commit
+- [x] Build and activate: `nix run home-manager -- switch --flake ~/.config/nix-config#jasper`
+- [x] Verify: `home-manager --version` — 25.11-pre
+- [x] Verify: existing tools still work, PATH is not broken
+- [x] Verify: NixOS (mbp2015) rebuilds successfully with new file structure
 
 ### Important Notes
 
 - **Do NOT enable `programs.zsh` or any dotfile management yet.** This phase is packages only. Dotfiles are Phase 3.
-- The existing `users/jasper/home.nix` is NixOS-specific (Linux paths, Hyprland). Don't modify it.
+- The NixOS config is at `users/jasper/nixos.nix`. Don't modify it during this phase.
 - If the flake eval fails, nothing is broken — your existing tools are unaffected. Fix the Nix expression and retry.
 
 ## Part 2: Migrate CLI Packages
@@ -67,7 +46,7 @@ The original plan was to migrate imperatively with `nix profile install`, then r
 Migrate in small batches (5–10 packages). The pattern for each batch:
 
 ```
-1. Add packages to home.packages in home-darwin.nix
+1. Add packages to home.packages in darwin.nix
 2. Rebuild: home-manager switch --flake ~/.config/nix-config#jasper
 3. Open a new terminal
 4. Verify each package works (which, --version, basic usage)
@@ -99,7 +78,7 @@ For each batch, copy this template:
 
 **Steps:**
 
-- [ ] Add packages to `home.packages` in `home-darwin.nix`
+- [ ] Add packages to `home.packages` in `darwin.nix`
 - [ ] Rebuild: `home-manager switch --flake ~/.config/nix-config#jasper`
 - [ ] For each package:
   - [ ] `which <command>` — should show a `/nix/store/...` path
