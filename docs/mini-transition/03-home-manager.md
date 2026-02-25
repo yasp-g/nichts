@@ -13,6 +13,12 @@ Home Manager is already running from Phase 2, managing your packages. This phase
 
 ## Dotfile Migration — One Config at a Time
 
+### Step 0: Fix PATH ordering (URGENT)
+
+After Phase 2, `~/.nix-profile/bin` comes after `/opt/homebrew/bin` in PATH. This causes tmux's `run-shell` (used by TPM, resurrect, continuum) to fail with `tmux: command not found` (exit 127). Fixing `programs.zsh` or `set-environment -g PATH` in tmux config will resolve this. **Do this first.**
+
+**CLEANUP REQUIRED:** A temporary `set-environment -g PATH` hack was added to `~/.tmux.conf` (top of file) to work around this. It MUST be removed once PATH is fixed properly here. Search for `TODO(phase-3)` in `~/.tmux.conf`.
+
 ### Order of Migration (low-risk to high-risk)
 
 1. **Git config** (`~/.gitconfig`) — Simple, low risk, great HM module
