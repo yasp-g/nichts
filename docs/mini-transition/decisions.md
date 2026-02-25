@@ -66,6 +66,13 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Alternatives considered:** Imperative migration with `nix profile install` in Phase 2, then move packages into Home Manager in Phase 3
 **Rationale:** The flake already has `home-manager` as an input. The package list (`home.packages = [ ... ]`) is identical whether Home Manager runs standalone or inside nix-darwin, so all work is permanent. The only downside is needing a working HM config before migrating packages, but the setup is minimal. Avoids doing the same work twice.
 
+### Drop nbdime Git Integration (For Now)
+**Date:** 2026-02-25
+**Phase:** 3
+**Decision:** Remove the nbdime Jupyter notebook diff/merge driver entries from `.gitconfig` rather than carrying them into the Home Manager `programs.git` config.
+**Alternatives considered:** Keep the entries in `extraConfig` even though nbdime isn't installed
+**Rationale:** `nbdime` isn't currently installed, so the entries (`git-nbdiffdriver`, `git-nbmergedriver`, `git-nbdifftool`, `git-nbmergetool`) are inert. Dropping them keeps the config clean. If Jupyter notebook diffing is needed again, add `nbdime` as a package and re-add the git config entries together in one step.
+
 ---
 
 *Add new decisions above this line.*

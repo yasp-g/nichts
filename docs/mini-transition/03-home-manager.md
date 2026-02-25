@@ -1,6 +1,6 @@
 # Phase 3: Migrate Dotfiles & Shell Config
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 **Prerequisites:** Phase 2 complete (Home Manager running, packages migrated)
 **Estimated time:** 3–5 sessions
 **Outcome:** Dotfiles and shell configuration managed declaratively via Home Manager
@@ -71,7 +71,7 @@ xdg.configFile."some-app/config".source = ./configs/some-app-config;
 
 | Config | HM Module? | Backed up | Migrated | Verified | Committed |
 |--------|-----------|-----------|----------|----------|-----------|
-| `.gitconfig` | `programs.git` | ☐ | ☐ | ☐ | ☐ |
+| `.gitconfig` | `programs.git` | ☑ | ☑ | ☑ | ☐ |
 | `.ssh/config` | `programs.ssh` | ☐ | ☐ | ☐ | ☐ |
 | `~/.config/yazi/` | `programs.yazi` | ☐ | ☐ | ☐ | ☐ |
 | `~/.config/nvim/` | `programs.neovim` or `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |

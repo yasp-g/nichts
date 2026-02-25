@@ -38,7 +38,7 @@ Each layer is independent but composable. Adopt them bottom-up, one at a time.
 | 0 | Audit & Inventory | `DONE` | [00-audit.md](00-audit.md) |
 | 1 | Install Nix | `DONE` | [01-install-nix.md](01-install-nix.md) |
 | 2 | Home Manager & CLI Packages | `DONE` | [02-migrate-cli.md](02-migrate-cli.md) |
-| 3 | Dotfiles & Shell Config | `NOT_STARTED` | [03-home-manager.md](03-home-manager.md) |
+| 3 | Dotfiles & Shell Config | `IN_PROGRESS` | [03-home-manager.md](03-home-manager.md) |
 | 4 | Introduce nix-darwin | `NOT_STARTED` | [04-nix-darwin.md](04-nix-darwin.md) |
 | 5 | Multi-Machine Consolidation | `NOT_STARTED` | [05-consolidation.md](05-consolidation.md) |
 

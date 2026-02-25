@@ -7,4 +7,15 @@
   ];
 
   programs.home-manager.enable = true;
+
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+    settings = {
+      user.name = "yasp-g";
+      user.email = "jasper@yasp.studio";
+      init.defaultBranch = "main";
+      core.autocrlf = "input";
+    };
+  };
 }
