@@ -72,12 +72,12 @@ xdg.configFile."some-app/config".source = ./configs/some-app-config;
 | Config | HM Module? | Backed up | Migrated | Verified | Committed |
 |--------|-----------|-----------|----------|----------|-----------|
 | `.gitconfig` | `programs.git` | ☑ | ☑ | ☑ | ☐ |
-| `.ssh/config` | `programs.ssh` | ☐ | ☐ | ☐ | ☐ |
+| `.ssh/config` | `programs.ssh` | ☑ | ☑ | ☑ | ☐ |
 | `~/.config/yazi/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
 | `~/.config/nvim/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
 | `~/.config/aerospace/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
-| `~/.config/zed/` | `xdg.configFile` | ☐ | ☐ | ☐ | ☐ |
-| `~/.config/gh/` | `programs.gh` | ☐ | ☐ | ☐ | ☐ |
+| `~/.config/zed/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
+| `~/.config/gh/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
 | `.zshrc` / `.p10k.zsh` | `programs.zsh` | ☐ | ☐ | ☐ | ☐ |
 
 ## Shell Config Migration (Do This Last)
