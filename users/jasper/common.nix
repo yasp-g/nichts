@@ -15,6 +15,12 @@
     recursive = true;
   };
 
+  # Yazi — config files only, plugins managed by yazi's package manager
+  xdg.configFile."yazi" = {
+    source = ./common/yazi;
+    recursive = true;
+  };
+
   programs.git = {
     enable = true;
     lfs.enable = true;

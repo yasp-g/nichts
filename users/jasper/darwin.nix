@@ -47,4 +47,7 @@
       wireshark
     ];
   };
+
+  # AeroSpace — macOS-only tiling window manager
+  xdg.configFile."aerospace/aerospace.toml".source = ./darwin/aerospace/aerospace.toml;
 }
