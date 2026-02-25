@@ -14,6 +14,7 @@
       git
       neovim
       fzf
+      ripgrep
       tree
       tmux
       rsync
@@ -32,6 +33,18 @@
       trash-cli
       uv
       yazi
+
+      # Batch 3 — dev/specialty tools
+      cabal-install
+      cmake
+      exercism
+      git-filter-repo
+      haskell-language-server
+      stack
+      luarocks
+      lynx
+      pandoc
+      wireshark
     ];
   };
 }
