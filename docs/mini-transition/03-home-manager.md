@@ -1,6 +1,6 @@
 # Phase 3: Migrate Dotfiles & Shell Config
 
-**Status:** `IN_PROGRESS`
+**Status:** `DONE`
 **Prerequisites:** Phase 2 complete (Home Manager running, packages migrated)
 **Estimated time:** 3–5 sessions
 **Outcome:** Dotfiles and shell configuration managed declaratively via Home Manager
