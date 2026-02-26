@@ -78,7 +78,7 @@ xdg.configFile."some-app/config".source = ./configs/some-app-config;
 | `~/.config/aerospace/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
 | `~/.config/zed/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
 | `~/.config/gh/` | `xdg.configFile` | ☑ | ☑ | ☑ | ☐ |
-| `.zshrc` / `.p10k.zsh` | `programs.zsh` | ☐ | ☐ | ☐ | ☐ |
+| `.zshrc` / `.p10k.zsh` | `programs.zsh` | ☑ | ☑ | ☑ | ☐ |
 
 ## Shell Config Migration (Do This Last)
 
