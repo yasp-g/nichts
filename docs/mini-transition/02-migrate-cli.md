@@ -1,6 +1,6 @@
 # Phase 2: Set Up Home Manager & Migrate CLI Packages
 
-**Status:** `IN_PROGRESS`
+**Status:** `DONE`
 **Prerequisites:** Phase 1 complete, `reference/inventory.md` has categorized Homebrew formulas
 **Estimated time:** 2–4 sessions
 **Outcome:** Standalone Home Manager running on the Mac mini, all KEEP CLI tools declared in `home.packages`, corresponding Homebrew formulas removed

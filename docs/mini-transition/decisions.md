@@ -32,11 +32,11 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Rationale:** Starting fresh on Mac mini is the ideal time to adopt flakes. Pinned inputs via flake.lock, standard interface for nix-darwin and Home Manager, eventual consolidation into a multi-machine flake. NixOS machine migrates to flakes in Phase 5.
 
 ### Secrets Approach
-**Date:** TBD
+**Date:** 2026-02-26
 **Phase:** 3
-**Decision:** TBD
+**Decision:** No action needed for now. No secrets were found in migrated dotfiles. gh auth tokens are in the macOS Keychain, SSH keys are in `~/.ssh/` (gitignored). If secrets are needed in Nix config later, start with a sourced env file (`source ~/.secrets` in `initExtra`) and consider agenix/sops-nix in Phase 5.
 **Alternatives considered:** env file sourced by shell, agenix, sops-nix, macOS Keychain
-**Rationale:** TBD
+**Rationale:** No dotfiles contained secrets, so no migration was required. Deferring a full secrets framework avoids unnecessary complexity.
 
 ### Consolidate Terraform/OpenTofu Version Managers to tenv
 **Date:** 2026-02-18
