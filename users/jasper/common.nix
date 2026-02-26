@@ -2,6 +2,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./common/tmux.nix ];
+
   home.packages = with pkgs; [
     # Populated during Phase 2 migration
   ];

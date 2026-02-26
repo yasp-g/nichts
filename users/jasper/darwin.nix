@@ -16,7 +16,6 @@
       fzf
       ripgrep
       tree
-      tmux
       rsync
       fastfetch
 
