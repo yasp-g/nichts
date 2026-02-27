@@ -12,11 +12,10 @@
     plugins = with pkgs.tmuxPlugins; [
       sensible
       yank
-      cpu
       vim-tmux-navigator
       resurrect
       continuum
-      # catppuccin loaded manually in extraConfig (must run AFTER options are set)
+      # catppuccin & cpu loaded manually in extraConfig (ordering-sensitive)
     ];
 
     extraConfig = ''
@@ -68,6 +67,9 @@
       set -g @resurrect-capture-pane-contents 'on'
       set -g @continuum-restore 'on'
       set -g @continuum-save-interval '15'
+
+      # cpu plugin runs LAST — it does text replacement on status-right/left
+      run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
     '';
   };
 }
