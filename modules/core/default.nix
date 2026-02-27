@@ -57,6 +57,7 @@
     # GUI apps
     firefox
     ghostty
+    keymapp
     obsidian
   ];
 }
