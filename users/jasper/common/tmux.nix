@@ -16,7 +16,7 @@
       vim-tmux-navigator
       resurrect
       continuum
-      catppuccin
+      # catppuccin loaded manually in extraConfig (must run AFTER options are set)
     ];
 
     extraConfig = ''
@@ -39,15 +39,16 @@
       bind -r m resize-pane -Z
       unbind -T copy-mode-vi MouseDragEnd1Pane
 
-      # Catppuccin
+      # Catppuccin — options MUST be set before running catppuccin.tmux
       set -g @catppuccin_flavour 'mocha'
       set -g @catppuccin_window_status_style "rounded"
       set -g @catppuccin_window_text " #W"
       set -g @catppuccin_window_current_text " #W"
       set -g @catppuccin_window_flags "icon"
 
-      # Load catppuccin theme and status modules
-      source ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/themes/catppuccin_mocha_tmux.conf
+      run-shell ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin.tmux
+
+      # Load catppuccin status modules (after catppuccin.tmux sets up base formatting)
       source ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/status/application.conf
       source ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/status/cpu.conf
       source ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/status/load.conf
