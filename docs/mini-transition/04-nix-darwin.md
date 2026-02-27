@@ -238,6 +238,14 @@ launchd.user.agents.my-service = {
 };
 ```
 
+## Consolidate Unfree Package Handling
+
+In Phase 3, unfree packages (e.g., `keymapp`) are allowed via an `allowUnfreePredicate` in the `homeConfigurations.jasper` block of `flake.nix`. Once nix-darwin is active, replace this with the `allowedUnfreePackages` pattern from `modules/nixpkgs.nix` so all machines use the same mechanism. See the decisions log for context.
+
+- [ ] Import `modules/nixpkgs.nix` into the nix-darwin config
+- [ ] Move unfree package names (e.g., `"keymapp"`) into `allowedUnfreePackages` in the appropriate module
+- [ ] Remove the `allowUnfreePredicate` from the standalone `homeConfigurations` block (which gets deleted anyway)
+
 ## Remove Standalone Home Manager
 
 Since Home Manager is now integrated as a nix-darwin module, clean up the standalone installation:

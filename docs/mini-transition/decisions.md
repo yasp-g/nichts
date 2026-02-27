@@ -80,6 +80,13 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Alternatives considered:** `programs.neovim` with `extraLuaConfig` or wrapping plugins via Nix
 **Rationale:** The existing config is a full Lua setup with lazy.nvim managing plugins. `programs.neovim` adds the neovim package itself, which conflicts with the one in `home.packages`. It also encourages Nix-wrapped plugin management, which doesn't fit a lazy.nvim workflow. Simpler to just symlink the Lua files and let lazy.nvim handle plugins. `lazy-lock.json` is a runtime artifact (plugin lock file) that lazy.nvim creates and updates automatically; committing it would cause unnecessary churn.
 
+### Unfree Packages in Standalone Home Manager
+**Date:** 2026-02-27
+**Phase:** 3
+**Decision:** Allow unfree packages (e.g., `keymapp`) via an `allowUnfreePredicate` in the `homeConfigurations.jasper` block of `flake.nix`, with an explicit allowlist.
+**Alternatives considered:** Using the `allowedUnfreePackages` option from `modules/nixpkgs.nix`; setting `allowUnfree = true` globally
+**Rationale:** Standalone Home Manager doesn't load NixOS/nix-darwin modules, so the custom `allowedUnfreePackages` option from `modules/nixpkgs.nix` isn't available. An explicit predicate in the flake keeps the allowlist tight. **Consolidate in Phase 4:** When migrating to nix-darwin, replace this with the `allowedUnfreePackages` pattern from `modules/nixpkgs.nix` so all machines use the same mechanism.
+
 ---
 
 *Add new decisions above this line.*
