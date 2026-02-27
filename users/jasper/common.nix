@@ -5,7 +5,7 @@
   imports = [ ./common/tmux.nix ];
 
   allowedUnfreePackages = [
-    keymapp
+    "keymapp"
   ];
 
   home.packages = with pkgs; [
