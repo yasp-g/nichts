@@ -4,10 +4,6 @@
 {
   imports = [ ./common/tmux.nix ];
 
-  allowedUnfreePackages = [
-    "keymapp"
-  ];
-
   home.packages = with pkgs; [
     # Populated during Phase 2 migration
     keymapp
