@@ -47,6 +47,8 @@
 
       # GUI apps
       claude-code
+      ice-bar
+      stats
 
       # Fonts
       nerd-fonts.meslo-lg
