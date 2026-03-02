@@ -44,6 +44,12 @@
   # System defaults (Dock, Finder, keyboard, etc.) — added incrementally
   # system.defaults = { };
 
-  # Homebrew Cask management — added after bootstrap is verified
-  # homebrew = { };
+  # Homebrew — only for casks without Nix darwin support
+  homebrew = {
+    enable = true;
+    onActivation.cleanup = "none";
+    casks = [
+      "ghostty"
+    ];
+  };
 }

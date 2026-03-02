@@ -48,7 +48,6 @@
       # GUI apps
       aerospace
       claude-code
-      ghostty
       ice-bar
       stats
 
