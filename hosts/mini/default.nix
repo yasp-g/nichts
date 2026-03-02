@@ -7,13 +7,15 @@
   ];
 
   # Required for nix-darwin — do not change after initial setup
-  system.stateVersion = 5;
+  system.stateVersion = 6;
 
   # Nix settings
   nix.settings = {
-    auto-optimise-store = true;
     experimental-features = [ "nix-command" "flakes" ];
   };
+
+  # Store optimisation (auto-optimise-store corrupts the store on macOS)
+  nix.optimise.automatic = true;
 
   # Automatic garbage collection (weekly, keep 7 days)
   nix.gc = {
