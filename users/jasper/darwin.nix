@@ -46,6 +46,7 @@
       wireshark
 
       # GUI apps
+      aerospace
       claude-code
       ice-bar
       stats
