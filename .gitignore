@@ -2,3 +2,4 @@ secrets/
 *.key
 *.pem
 *.DS_Store
+result
