@@ -1,5 +1,5 @@
 # Shared Home Manager configuration across all machines
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [ ./common/tmux.nix ];
@@ -57,14 +57,14 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtraFirst = ''
-      # Powerlevel10k instant prompt (must be first)
-      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      fi
-    '';
-
-    initExtra = ''
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        # Powerlevel10k instant prompt (must be first)
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+      '')
+      ''
       # Powerlevel10k theme + config
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       [[ ! -f ~/.config/nix-config/users/jasper/common/p10k.zsh ]] || source ~/.config/nix-config/users/jasper/common/p10k.zsh
@@ -87,7 +87,8 @@
       # Ensure Nix paths take priority over Homebrew/NVM
       PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
       export PATH
-    '';
+    ''
+    ];
   };
 
   programs.git = {
