@@ -61,7 +61,7 @@
       set -g status-right "#{E:@catppuccin_status_application}"
       set -agF status-right "#{E:@catppuccin_status_cpu}"
       set -agF status-right "#{E:@catppuccin_status_load}"
-      set -agF status-right "#{E:@catppuccin_status_uptime}"
+      set -ag status-right "#{E:@catppuccin_status_uptime}"
 
       # Resurrect / Continuum
       set -g @resurrect-capture-pane-contents 'on'
