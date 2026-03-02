@@ -30,6 +30,11 @@
     "keymapp"
   ];
 
+  # User account
+  users.users.jasper = {
+    home = "/Users/jasper";
+  };
+
   # Hostname
   networking.hostName = "mini";
 
