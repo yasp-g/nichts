@@ -44,6 +44,12 @@
       lynx
       pandoc
       wireshark
+
+      # GUI apps
+      claude-code
+
+      # Fonts
+      nerd-fonts.meslo-lg
     ];
   };
 
