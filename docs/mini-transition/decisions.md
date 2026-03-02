@@ -87,6 +87,13 @@ Record non-obvious choices made during the Nix transition. This helps future-you
 **Alternatives considered:** Using the `allowedUnfreePackages` option from `modules/nixpkgs.nix`; setting `allowUnfree = true` globally
 **Rationale:** Standalone Home Manager doesn't load NixOS/nix-darwin modules, so the custom `allowedUnfreePackages` option from `modules/nixpkgs.nix` isn't available. An explicit predicate in the flake keeps the allowlist tight. **Consolidate in Phase 4:** When migrating to nix-darwin, replace this with the `allowedUnfreePackages` pattern from `modules/nixpkgs.nix` so all machines use the same mechanism.
 
+### Pin nix-darwin to nix-darwin-25.11 Release Branch
+**Date:** 2026-03-02
+**Phase:** 4
+**Decision:** Pin nix-darwin to `github:nix-darwin/nix-darwin/nix-darwin-25.11` instead of using `master`.
+**Alternatives considered:** Switch `nixpkgs-darwin` to `nixpkgs-unstable` and keep nix-darwin on `master`
+**Rationale:** nix-darwin `master` moved to 26.05 and now enforces a version check against nixpkgs. Since both machines use stable 25.11 branches (`nixos-25.11` for NixOS, `nixpkgs-25.11-darwin` for macOS), pinning nix-darwin to the matching `nix-darwin-25.11` branch keeps everything consistent. Also updated the repo URL from the old `LnL7/nix-darwin` to the new `nix-darwin/nix-darwin` GitHub org.
+
 ---
 
 *Add new decisions above this line.*
