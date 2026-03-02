@@ -29,6 +29,7 @@
 
   # Unfree packages needed on this host
   allowedUnfreePackages = [
+    "claude-code"
     "keymapp"
   ];
 
