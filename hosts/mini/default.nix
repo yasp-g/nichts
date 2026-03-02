@@ -34,6 +34,7 @@
   ];
 
   # User account
+  system.primaryUser = "jasper";
   users.users.jasper = {
     home = "/Users/jasper";
   };
