@@ -35,33 +35,21 @@
       ];
     };
 
-    # Standalone Home Manager (Phase 2–3, replaced by darwinConfigurations in Phase 4)
-    homeConfigurations.jasper = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs-darwin {
-        system = "aarch64-darwin";
-        config.allowUnfreePredicate = pkg:
-          builtins.elem (nixpkgs-darwin.lib.getName pkg) [
-            "keymapp"
-          ];
-      };
-      modules = [ ./users/jasper/darwin.nix ];
+    # macOS hosts
+    darwinConfigurations.mini = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./hosts/mini
+        home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.jasper = import ./users/jasper/darwin.nix;
+          };
+        }
+      ];
     };
-
-    # macOS hosts (uncomment in Phase 4)
-    # darwinConfigurations.mini = nix-darwin.lib.darwinSystem {
-    #   system = "aarch64-darwin";
-    #   modules = [
-    #     ./hosts/mini
-    #     home-manager.darwinModules.home-manager
-    #     {
-    #       home-manager = {
-    #         useGlobalPkgs = true;
-    #         useUserPackages = true;
-    #         users.jasper = import ./users/jasper/darwin.nix;
-    #       };
-    #     }
-    #   ];
-    # };
 
   };
 }
