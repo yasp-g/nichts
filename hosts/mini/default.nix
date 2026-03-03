@@ -49,6 +49,10 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "none";
+    brews = [
+      "borders"   # Window borders (no nixpkgs equivalent)
+      "modular"   # Mojo/MAX toolchain (no nixpkgs equivalent)
+    ];
     casks = [
       "ghostty"
     ];

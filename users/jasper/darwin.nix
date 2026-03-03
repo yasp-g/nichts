@@ -9,6 +9,9 @@
     homeDirectory = "/Users/jasper";
     stateVersion = "25.11"; # Do not change after initial setup
 
+    # Homebrew binaries (borders, modular, etc.)
+    sessionPath = [ "/opt/homebrew/bin" ];
+
     packages = with pkgs; [
       # Batch 1 — essentials
       git
