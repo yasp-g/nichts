@@ -5,8 +5,38 @@
   imports = [ ./common/tmux.nix ];
 
   home.packages = with pkgs; [
-    # Populated during Phase 2 migration
+    # Essentials
+    git
+    neovim
+    fzf
+    ripgrep
+    tree
+    rsync
+    neofetch
+
+    # Daily-use tools
+    chafa
+    ffmpeg
+    glow
+    gnupg
+    opencode
+    tenv
+    trash-cli
+    uv
+    yazi
+
+    # Dev/specialty tools
+    exercism
+    luarocks
     keymapp
+
+    # GUI apps
+    claude-code
+    obsidian
+    vscode
+
+    # Fonts
+    nerd-fonts.meslo-lg
   ];
 
   programs.home-manager.enable = true;

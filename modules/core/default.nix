@@ -23,6 +23,7 @@
   allowedUnfreePackages = [
     "claude-code"
     "obsidian"
+    "vscode"
   ];
   # Timezone
   time.timeZone = "Europe/Berlin";
@@ -36,19 +37,10 @@
     extraGroups = [ "wheel" "networkmanager" "video" ];
   };
 
-  # Base packages
+  # Base packages (NixOS system-level only; shared packages are in users/jasper/common.nix)
   environment.systemPackages = with pkgs; [
-    # CLI utilities
-    glow
-    tmux
-    tree
-    wget
-
-    # Development
-    claude-code
-    git
-    neovim
     vim
+    wget
 
     # Nix tooling
     nil
@@ -57,6 +49,5 @@
     # GUI apps
     firefox
     ghostty
-    obsidian
   ];
 }

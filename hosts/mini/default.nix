@@ -31,6 +31,8 @@
   allowedUnfreePackages = [
     "claude-code"
     "keymapp"
+    "obsidian"
+    "vscode"
   ];
 
   # User account

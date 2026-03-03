@@ -13,49 +13,24 @@
     sessionPath = [ "/opt/homebrew/bin" ];
 
     packages = with pkgs; [
-      # Batch 1 — essentials
-      git
-      neovim
-      fzf
-      ripgrep
-      tree
-      rsync
-      fastfetch
-
-      # Batch 2 — daily-use tools
-      chafa
-      ffmpeg
-      glow
-      gnupg
+      # Darwin-only daily tools
       imagemagick
-      # jp2a (broken)
       kubectl
-      opencode
-      tenv
-      trash-cli
-      uv
-      yazi
 
-      # Batch 3 — dev/specialty tools
+      # Darwin-only dev/specialty tools
       cabal-install
       cmake
-      exercism
       git-filter-repo
       haskell-language-server
       stack
-      luarocks
       lynx
       pandoc
       wireshark
 
-      # GUI apps
+      # Darwin-only GUI apps
       aerospace
-      claude-code
       ice-bar
       stats
-
-      # Fonts
-      nerd-fonts.meslo-lg
     ];
   };
 
