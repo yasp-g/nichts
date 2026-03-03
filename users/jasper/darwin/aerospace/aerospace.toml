@@ -280,6 +280,9 @@ run = 'layout floating'
 if.app-id = 'ch.protonvpn.mac'
 run = 'layout floating'
 [[on-window-detected]]
+if.app-id = 'io.zsa.keymapp'
+run = 'layout floating'
+[[on-window-detected]]
 if.app-id = 'com.microsoft.Word'
 run = 'move-node-to-workspace W'
 [[on-window-detected]]
