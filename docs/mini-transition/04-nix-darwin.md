@@ -26,18 +26,18 @@
 
 ### Remaining
 
-- [ ] **Verify PATH ordering after full reboot** — current tmux sessions carry stale PATH from before nix-darwin. After reboot, confirm:
-  - Nix paths (`/etc/profiles/per-user/jasper/bin`, `/run/current-system/sw/bin`) come before `/opt/homebrew/bin`
+- [x] **Verify PATH ordering after full reboot** — confirmed in fresh Ghostty window:
+  - Nix paths (`/etc/profiles/per-user/jasper/bin`, `/run/current-system/sw/bin`) before system paths
+  - `/opt/homebrew/bin` added via `home.sessionPath` in `darwin.nix`
   - No duplicate PATH entries
-  - `which claude` → Nix path
+  - `which claude` → `/etc/profiles/per-user/jasper/bin/claude`
   - `which borders` → `/opt/homebrew/bin/borders`
-  - NVM, luarocks, modular still work
-  - If Homebrew is NOT in PATH after reboot, need to add `/opt/homebrew/bin` to PATH (for `borders` and `modular` formulas). Check if nix-darwin's `homebrew.enable` handles this automatically.
-- [ ] **Add `borders` and `modular` to homebrew.brews** — these are DEFERRED Homebrew formulas with no nixpkgs equivalent
-- [ ] **Manage macOS defaults** — Dock, Finder, keyboard settings (see inventory.md for audit)
-- [ ] **Consider `homebrew.onActivation.cleanup = "zap"`** — once confident all casks/brews are declared
-- [ ] **Update inventory.md** — mark migrated casks as MIGRATED
+  - NVM, luarocks, modular all work
+- [x] **Add `borders` and `modular` to homebrew.brews** — added to `hosts/mini/default.nix`
+- [x] **Update inventory.md** — marked migrated formulas and casks as MIGRATED
 - [ ] **Commit and push all changes**
+- [ ] **Manage macOS defaults** — DEFERRED to after Phase 5 (cosmetic, lower priority than package consolidation)
+- [ ] **Consider `homebrew.onActivation.cleanup = "zap"`** — DEFERRED until confident all casks/brews are declared
 
 ## Gotchas Discovered
 

@@ -20,47 +20,47 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 | `aha` | REMOVE | `aha` | Converts ANSI to HTML — niche, low priority |
 | `bind` | REMOVE | `bind` | DNS tools (dig, nslookup) — macOS ships `dig`; may not need Homebrew version |
 | `boost` | REMOVE | `boost` | C++ library — check if anything actively needs it |
-| `cabal-install` | KEEP | `cabal-install` | Haskell package manager — not active now but keeping for future Haskell use |
-| `chafa` | KEEP | `chafa` | Terminal image viewer — used by yazi/tools |
-| `cmake` | KEEP | `cmake` | Build tool — needed for compiling things |
+| `cabal-install` | MIGRATED | `cabal-install` | Haskell package manager — not active now but keeping for future Haskell use |
+| `chafa` | MIGRATED | `chafa` | Terminal image viewer — used by yazi/tools |
+| `cmake` | MIGRATED | `cmake` | Build tool — needed for compiling things |
 | `curl` | REMOVE | `curl` | macOS ships curl — may not need Homebrew version |
-| `exercism` | KEEP | `exercism` | Coding practice platform — remove if not active |
-| `fastfetch` | KEEP | `fastfetch` | System info display |
+| `exercism` | MIGRATED | `exercism` | Coding practice platform — remove if not active |
+| `fastfetch` | MIGRATED | `fastfetch` | System info display |
 | `felixkratz/formulae/borders` | DEFERRED | n/a | Window borders — no nixpkgs equivalent; keep in Homebrew brews |
-| `ffmpeg` | KEEP | `ffmpeg` | Media processing |
-| `fzf` | KEEP | `fzf` | Fuzzy finder — essential |
-| `git` | KEEP | `git` | Essential |
-| `git-filter-repo` | KEEP | `git-filter-repo` | Specialized git history rewriting |
-| `glow` | KEEP | `glow` | Markdown viewer in terminal |
-| `gnupg` | KEEP | `gnupg` | GPG for encryption/signing |
+| `ffmpeg` | MIGRATED | `ffmpeg` | Media processing |
+| `fzf` | MIGRATED | `fzf` | Fuzzy finder — essential |
+| `git` | MIGRATED | `git` | Essential |
+| `git-filter-repo` | MIGRATED | `git-filter-repo` | Specialized git history rewriting |
+| `glow` | MIGRATED | `glow` | Markdown viewer in terminal |
+| `gnupg` | MIGRATED | `gnupg` | GPG for encryption/signing |
 | `hashicorp/tap/terraform` | REMOVE | n/a | tenv manages terraform binaries directly — Homebrew formula is redundant |
-| `haskell-language-server` | KEEP | `haskell-language-server` | Not active now but keeping for future Haskell use |
-| `haskell-stack` | KEEP | `haskell-stack` | Not active now but keeping for future Haskell use |
-| `imagemagick` | KEEP | `imagemagick` | Image manipulation |
+| `haskell-language-server` | MIGRATED | `haskell-language-server` | Not active now but keeping for future Haskell use |
+| `haskell-stack` | MIGRATED | `stack` | Not active now but keeping for future Haskell use |
+| `imagemagick` | MIGRATED | `imagemagick` | Image manipulation |
 | `jp2a` | REMOVE | `jp2a` | Broken on aarch64-darwin; not needed |
-| `kubernetes-cli` | KEEP | `kubectl` | kubectl — active use with terraform/infra work |
+| `kubernetes-cli` | MIGRATED | `kubectl` | kubectl — active use with terraform/infra work |
 | `llvm` | REMOVE | `llvm` | Compiler infrastructure — check if anything needs it explicitly |
-| `luarocks` | KEEP | `luarocks` | Lua package manager — used for Neovim plugins; may be replaced by Nix in Phase 3 |
-| `lynx` | KEEP | `lynx` | Text browser — low priority, remove if unused |
+| `luarocks` | MIGRATED | `luarocks` | Lua package manager — used for Neovim plugins |
+| `lynx` | MIGRATED | `lynx` | Text browser — low priority, remove if unused |
 | `modularml/packages/modular` | DEFERRED | n/a | Mojo language toolkit — no nixpkgs package; keep in Homebrew or manage manually |
-| `neovim` | KEEP | `neovim` | Primary editor |
-| `opencode` | KEEP | `opencode` | AI coding tool — also installed as cask; check for duplication |
-| `pandoc` | KEEP | `pandoc` | Document converter |
-| `powerlevel10k` | DEFERRED | `zsh-powerlevel10k` | Zsh theme — will be managed by Home Manager in Phase 3 |
-| `rsync` | KEEP | `rsync` | File sync — macOS ships old rsync; Homebrew/Nix version is newer |
+| `neovim` | MIGRATED | `neovim` | Primary editor |
+| `opencode` | MIGRATED | `opencode` | AI coding tool |
+| `pandoc` | MIGRATED | `pandoc` | Document converter |
+| `powerlevel10k` | MIGRATED | `zsh-powerlevel10k` | Zsh theme — managed by Home Manager |
+| `rsync` | MIGRATED | `rsync` | File sync — macOS ships old rsync; Nix version is newer |
 | `tbb` | REMOVE | `tbb` | Intel Threading Building Blocks — likely a dep, check `brew uses tbb` |
 | `telnet` | REMOVE | `inetutils` | Network debugging — rarely needed |
 | `tfenv` | REMOVE | n/a | Replaced by `tenv` (handles both Terraform and OpenTofu) |
-| `tmux` | KEEP | `tmux` | Terminal multiplexer |
+| `tmux` | MIGRATED | `tmux` | Terminal multiplexer |
 | `tofuenv` | REMOVE | n/a | Replaced by `tenv` |
-| `trash` | KEEP | `trash-cli` | Safe rm alternative |
-| `tree` | KEEP | `tree` | Directory listing |
-| `uv` | KEEP | `uv` | Python package/project manager |
+| `trash` | MIGRATED | `trash-cli` | Safe rm alternative |
+| `tree` | MIGRATED | `tree` | Directory listing |
+| `uv` | MIGRATED | `uv` | Python package/project manager |
 | `warrensbox/tap/tfswitch` | REMOVE | n/a | Replaced by `tenv` |
-| `tenv` | KEEP | `tenv` | Unified Terraform + OpenTofu version manager — replaces tfenv, tofuenv, tfswitch |
-| `wireshark` | KEEP | `wireshark` | Network analysis — keep if used for debugging |
-| `yazi` | KEEP | `yazi` | File manager |
-| `zsh-completions` | DEFERRED | n/a | Will be handled by Home Manager `programs.zsh` in Phase 3 |
+| `tenv` | MIGRATED | `tenv` | Unified Terraform + OpenTofu version manager — replaces tfenv, tofuenv, tfswitch |
+| `wireshark` | MIGRATED | `wireshark` | Network analysis — keep if used for debugging |
+| `yazi` | MIGRATED | `yazi` | File manager |
+| `zsh-completions` | MIGRATED | n/a | Handled by Home Manager `programs.zsh` |
 
 **Decision:** Consolidating `tfenv`, `tofuenv`, and `tfswitch` → `tenv`. tenv handles both Terraform and OpenTofu and is available in nixpkgs. Migrate in Phase 2.
 
@@ -70,14 +70,14 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 
 | Cask | Status | Notes |
 |------|--------|-------|
-| `aerospace` | KEEP | Window manager — has active config at `~/.config/aerospace/` |
-| `claude-code` | KEEP | AI coding assistant |
-| `font-meslo-lg-nerd-font` | KEEP | Nerd Font — used in Ghostty/terminal; move to `fonts.packages` in nix-darwin |
-| `ghostty` | KEEP | Terminal emulator |
-| `jordanbaird-ice` | KEEP | Menu bar manager (Ice.app) |
-| `stats` | KEEP | Menu bar system stats |
+| `aerospace` | MIGRATED | Window manager — now Nix package `aerospace` |
+| `claude-code` | MIGRATED | AI coding assistant — now Nix package `claude-code` |
+| `font-meslo-lg-nerd-font` | MIGRATED | Nerd Font — now Nix package `nerd-fonts.meslo-lg` |
+| `ghostty` | DEFERRED | Terminal emulator — nixpkgs package is Linux-only, stays in Homebrew |
+| `jordanbaird-ice` | MIGRATED | Menu bar manager — now Nix package `ice-bar` |
+| `stats` | MIGRATED | Menu bar system stats — now Nix package `stats` |
 
-All 6 casks are KEEP — small, clean list.
+5 of 6 casks migrated to Nix. Ghostty stays in Homebrew (no aarch64-darwin support in nixpkgs).
 
 ---
 
