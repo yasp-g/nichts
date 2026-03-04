@@ -23,6 +23,7 @@
   allowedUnfreePackages = [
     "claude-code"
     "discord"
+    "keymapp"
     "obsidian"
     "vscode"
   ];
