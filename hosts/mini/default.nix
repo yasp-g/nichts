@@ -60,6 +60,7 @@
       "modular"   # Mojo/MAX toolchain (no nixpkgs equivalent)
     ];
     casks = [
+      "element"
       "ghostty"
       "gimp"
     ];

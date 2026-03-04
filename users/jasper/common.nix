@@ -33,7 +33,6 @@
     # GUI apps
     claude-code
     discord
-    element-desktop
     obsidian
     vscode
     zed-editor
