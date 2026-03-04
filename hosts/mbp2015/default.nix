@@ -41,7 +41,7 @@
 
   # Hardware-specific unfree/insecure packages
   allowedUnfreePackages = [ "broadcom-sta" ];
-  allowedInsecurePackages = [ "broadcom-sta-6.30.223.271-59-6.12.70" ];
+  allowedInsecurePackages = [ "broadcom-sta" ];  # prefix-matched, survives kernel updates
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [

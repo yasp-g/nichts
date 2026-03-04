@@ -12,7 +12,7 @@
     allowedInsecurePackages = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
-      description = "Insecure package names to allow";
+      description = "Insecure package names/prefixes to allow (prefix-matched)";
     };
   };
 
@@ -20,6 +20,8 @@
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) config.allowedUnfreePackages;
 
-    nixpkgs.config.permittedInsecurePackages = config.allowedInsecurePackages;
+    # Use prefix matching so version changes don't require config updates
+    nixpkgs.config.allowInsecurePredicate = pkg:
+      builtins.any (prefix: lib.hasPrefix prefix (lib.getName pkg)) config.allowedInsecurePackages;
   };
 }
