@@ -36,7 +36,7 @@
     "obsidian"
     "postman"
     "vscode"
-    "zoom-us"
+    "zoom"
   ];
 
   # User account
