@@ -22,6 +22,7 @@
   # Unfree packages needed across all hosts
   allowedUnfreePackages = [
     "claude-code"
+    "discord"
     "obsidian"
     "vscode"
   ];
@@ -49,5 +50,6 @@
     # GUI apps
     firefox
     ghostty
+    libreoffice
   ];
 }

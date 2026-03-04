@@ -30,9 +30,13 @@
   # Unfree packages needed on this host
   allowedUnfreePackages = [
     "claude-code"
+    "discord"
+    "google-chrome"
     "keymapp"
     "obsidian"
+    "postman"
     "vscode"
+    "zoom-us"
   ];
 
   # User account

@@ -31,9 +31,13 @@
     keymapp
 
     # GUI apps
+    calibre
     claude-code
+    discord
+    element-desktop
     obsidian
     vscode
+    zed-editor
 
     # Fonts
     nerd-fonts.meslo-lg
