@@ -60,9 +60,21 @@
       "modular"   # Mojo/MAX toolchain (no nixpkgs equivalent)
     ];
     casks = [
+      "calibre"
+      "docker"
       "element"
+      "freecad"
       "ghostty"
       "gimp"
+      "notion"
+      "pdfsam-basic"
+      "protonvpn"
+      "raspberry-pi-imager"
+      "sqlectron"
+      "steam"
+      "teamviewer-host"
+      "vnc-viewer"
+      "whatsapp"
     ];
   };
 }

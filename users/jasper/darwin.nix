@@ -30,6 +30,7 @@
       # Darwin-only GUI apps
       aerospace
       google-chrome
+      grandperspective
       ice-bar
       postman
       stats
