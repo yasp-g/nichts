@@ -68,92 +68,120 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 
 ## Homebrew Casks
 
+### Original Casks (from Phase 0 audit)
+
 | Cask | Status | Notes |
 |------|--------|-------|
 | `aerospace` | MIGRATED | Window manager — now Nix package `aerospace` |
 | `claude-code` | MIGRATED | AI coding assistant — now Nix package `claude-code` |
 | `font-meslo-lg-nerd-font` | MIGRATED | Nerd Font — now Nix package `nerd-fonts.meslo-lg` |
-| `ghostty` | DEFERRED | Terminal emulator — nixpkgs package is Linux-only, stays in Homebrew |
+| `ghostty` | DEFERRED | Terminal emulator — nixpkgs Linux-only, Homebrew cask |
 | `jordanbaird-ice` | MIGRATED | Menu bar manager — now Nix package `ice-bar` |
 | `stats` | MIGRATED | Menu bar system stats — now Nix package `stats` |
 
-5 of 6 casks migrated to Nix. Ghostty stays in Homebrew (no aarch64-darwin support in nixpkgs).
+### New Casks (added in Phase 4, managed by nix-darwin)
+
+| Cask | Notes |
+|------|-------|
+| `calibre` | Ebook management — nixpkgs broken on darwin |
+| `docker` | Docker Desktop |
+| `element` | Matrix client — nixpkgs build fails on darwin |
+| `freecad` | 3D CAD — not in nixpkgs for darwin |
+| `gimp` | Image editor — nixpkgs Linux-only |
+| `notion` | Notes/productivity — not in nixpkgs |
+| `pdfsam-basic` | PDF tools — not in nixpkgs |
+| `protonvpn` | VPN — not in nixpkgs for darwin |
+| `raspberry-pi-imager` | SD card imaging — not in nixpkgs |
+| `sqlectron` | SQL client — not in nixpkgs |
+| `steam` | Gaming — nixpkgs Linux-only |
+| `teamviewer-host` | Remote access — not in nixpkgs |
+| `vnc-viewer` | Remote desktop — not in nixpkgs |
+| `whatsapp` | Messaging — not in nixpkgs |
+
+**Total:** 15 Homebrew casks managed by nix-darwin.
 
 ---
 
 ## Applications (/Applications/)
 
-| Application | Install method | Status | Notes |
-|-------------|---------------|--------|-------|
-| `Adobe Acrobat DC` | Direct download | KEEP | Preview handles most PDFs; remove if not specifically needed |
-| `AeroSpace.app` | Homebrew Cask | KEEP | Window manager — managed via cask above |
-| `AgeClock.app` | Unknown | REMOVE | Decide based on use |
-| `Anaconda-Navigator.app` | Direct download | REMOVE | Using `uv` for Python now — Anaconda is heavyweight clutter |
-| `Arc.app` | Direct download | KEEP | Browser |
-| `Be Focused.app` | Unknown | KEEP |  Pomodoro timer — keep if actively using |
-| `calibre.app` | Direct download | KEEP | Ebook management |
-| `DeepL.app` | Direct download | KEEP | Translation tool |
-| `Developer.app` | Mac App Store | KEEP | Apple Developer resources |
-| `Dia.app` | Direct download | REMOVE | Diagram tool — check if actively used |
-| `Discord.app` | Direct download | KEEP | Communication |
-| `Disk Inventory X.app` | Direct download | REMOVE | Keeping GrandPerspective instead |
-| `DisplayLink Manager.app` | Direct download | KEEP | Required if using DisplayLink dock/monitors |
-| `Docker.app` | Direct download | KEEP | Containers |
-| `Element.app` | Direct download | KEEP | Matrix client — keep if using Matrix |
-| `Exporter.app` | Unknown | REMOVE | Clarify what this exports |
-| `FreeCAD.app` | Direct download | KEEP | 3D CAD — keep if active use |
-| `Ghostty.app` | Homebrew Cask | KEEP | Terminal |
-| `GIMP.app` | Direct download | KEEP | Image editor |
-| `GitHub Desktop.app` | Direct download | REMOVE | Have git CLI and gh — may be redundant |
-| `Google Chrome.app` | Direct download | KEEP | Browser |
-| `Grammarly for Safari.app` | Mac App Store | REMOVE | Keep if using Grammarly |
-| `GrandPerspective.app` | Direct download | KEEP | Disk visualizer |
-| `Hue Sync.app` | Direct download | REMOVE | Philips Hue — keep if have Hue lights |
-| `Ice.app` | Homebrew Cask | KEEP | Menu bar manager |
-| `JetBrains Toolbox.app` | Direct download | REMOVE | Keep if using JetBrains IDEs |
-| `Kindle.app` | Mac App Store | REMOVE | Ebook reader |
-| `logioptionsplus.app` | Direct download | KEEP | Required for Logitech mouse/keyboard |
-| `Microsoft Excel.app` | Mac App Store | KEEP | Office suite |
-| `Microsoft PowerPoint.app` | Mac App Store | KEEP | Office suite |
-| `Microsoft Teams.app` | Direct download | KEEP | Keep if required for work |
-| `Microsoft To Do.app` | Mac App Store | REMOVE | Have Notion — may be redundant |
-| `Microsoft Word.app` | Mac App Store | KEEP | Office suite |
-| `Notion Calendar.app` | Direct download | REMOVE | Decide vs other calendar apps |
-| `Notion.app` | Direct download | KEEP | Notes/productivity |
-| `Numbers.app` | Built-in | KEEP | Built-in |
-| `Obsidian.app` | Direct download | KEEP | Notes |
-| `OneDrive.app` | Mac App Store | REMOVE | Not using OneDrive |
-| `OnVUE.app` | Direct download | REMOVE | Online proctoring — exam-specific, can reinstall if needed |
-| `OnyX.app` | Direct download | REMOVE | macOS maintenance — rarely needed |
-| `Opera.app` | Direct download | KEEP | Extra browser — probably not needed alongside Arc + Chrome |
-| `Pages.app` | Built-in | KEEP | Built-in |
-| `PDFsam Basic.app` | Direct download | KEEP | PDF split/merge — Preview/Acrobat may cover this |
-| `Pokemon Reborn` | Direct download | KEEP | Game — keep if playing |
-| `Postman.app` | Direct download | KEEP | API testing |
-| `ProtonVPN.app` | Direct download | KEEP | VPN |
-| `Python 2.7` | Direct download | REMOVE | Ancient — remove |
-| `Python 3.6` | Direct download | REMOVE | Ancient — remove |
-| `Python 3.7` | Direct download | REMOVE | Ancient — remove |
-| `Python 3.10` | Direct download | REMOVE | Old — using uv; remove |
-| `Python 3.11` | Direct download | REMOVE | Old — using uv; remove |
-| `Raspberry Pi Imager.app` | Direct download | KEEP | Keep if working with Pi hardware |
-| `Research.app` | Unknown | REMOVE | Identify what this is |
-| `Safari.app` | Built-in | KEEP | Built-in |
-| `sqlectron.app` | Direct download | KEEP | SQL client — keep if actively used |
-| `Stats.app` | Homebrew Cask | KEEP | Menu bar stats |
-| `Steam.app` | Direct download | KEEP | Gaming |
-| `TeamViewerHost.app` | Direct download | KEEP | Remote access — keep if needed |
-| `VNC Viewer.app` | Direct download | KEEP | Remote desktop |
-| `Visual Studio Code.app` | Direct download | KEEP | Keeping alongside Zed and Neovim for now |
-| `WD Discovery` | Direct download | KEEP | Keep if using WD external drives |
-| `WD Drive Utilities.app` | Direct download | KEEP | Keep if using WD external drives |
-| `WD Drive Utilities Uninstaller.app` | Direct download | KEEP | Uninstaller utility — remove after WD decision |
-| `WhatsApp.app` | Direct download | KEEP | Messaging |
-| `Xcode.app` | Mac App Store | KEEP | Required for macOS development |
-| `Zed.app` | Direct download | KEEP | Editor — actively configured |
-| `zoom.us.app` | Direct download | KEEP | Video calls |
+**Updated 2026-03-04** — Apps now under Nix/Homebrew management.
 
-**Clear REMOVEs:** Anaconda-Navigator, Disk Inventory X, OnVUE, Python 2.7/3.6/3.7/3.10/3.11
+### Nix-managed (~/Applications/Home Manager Apps/)
+
+| Application | Nix package | Notes |
+|-------------|-------------|-------|
+| AeroSpace | `aerospace` | Tiling window manager |
+| Discord | `discord` | Communication |
+| Google Chrome | `google-chrome` | Browser |
+| GrandPerspective | `grandperspective` | Disk visualizer |
+| Ice | `ice-bar` | Menu bar manager |
+| Keymapp | `keymapp` | ZSA keyboard config |
+| Obsidian | `obsidian` | Notes |
+| Postman | `postman` | API testing |
+| Stats | `stats` | Menu bar stats |
+| Visual Studio Code | `vscode` | Editor |
+| Wireshark | `wireshark` | Network analysis |
+| Zed | `zed-editor` | Editor |
+| zoom.us | `zoom-us` | Video calls |
+
+### Homebrew casks (managed by nix-darwin)
+
+| Application | Cask name | Notes |
+|-------------|-----------|-------|
+| calibre | `calibre` | Ebook management |
+| Docker | `docker` | Containers |
+| Element | `element` | Matrix client |
+| FreeCAD | `freecad` | 3D CAD |
+| Ghostty | `ghostty` | Terminal |
+| GIMP | `gimp` | Image editor |
+| Notion | `notion` | Notes/productivity |
+| PDFsam Basic | `pdfsam-basic` | PDF tools |
+| ProtonVPN | `protonvpn` | VPN |
+| Raspberry Pi Imager | `raspberry-pi-imager` | SD card imaging |
+| sqlectron | `sqlectron` | SQL client |
+| Steam | `steam` | Gaming |
+| TeamViewerHost | `teamviewer-host` | Remote access |
+| VNC Viewer | `vnc-viewer` | Remote desktop |
+| WhatsApp | `whatsapp` | Messaging |
+
+### Manual installs (remaining in /Applications/)
+
+| Application | Install method | Notes |
+|-------------|---------------|-------|
+| Adobe Acrobat DC | Direct download | Proprietary PDF reader |
+| AgeClock | Unknown | User kept |
+| Arc | Direct download | Proprietary browser |
+| Be Focused | Unknown | Pomodoro timer — user kept |
+| DeepL | Direct download | Translation tool — no nixpkgs/cask |
+| Developer | Mac App Store | Apple Developer resources |
+| Dia | Direct download | Diagram tool — user kept |
+| DisplayLink Manager | Direct download | Hardware driver |
+| logioptionsplus | Direct download | Hardware driver (Logitech) |
+| Microsoft Excel/PowerPoint/Word/Teams | Mac App Store | Office suite |
+| Numbers/Pages/Safari | Built-in | Apple built-in |
+| Opera | Direct download | Browser — user kept |
+| Pokemon Reborn | Direct download | Game |
+| WD Discovery/Utilities | Direct download | Hardware drivers |
+| Xcode | Mac App Store | Required for dev |
+
+### Removed
+
+| Application | Notes |
+|-------------|-------|
+| Anaconda-Navigator | Replaced by `uv` |
+| Disk Inventory X | Using GrandPerspective |
+| Exporter | Unknown, not needed |
+| GitHub Desktop | Using git CLI |
+| Grammarly for Safari | Not using |
+| Hue Sync | Not using |
+| JetBrains Toolbox | Not using |
+| Kindle | Not using |
+| Microsoft To Do | Using Notion |
+| Notion Calendar | Not using |
+| OneDrive | Not using |
+| OnVUE | Exam proctoring, not needed |
+| OnyX | Rarely used |
+| Python 2.7/3.6/3.7/3.10/3.11 | Using `uv` for Python |
 
 ---
 

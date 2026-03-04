@@ -1,13 +1,26 @@
 # Phase 5: Multi-Machine Consolidation
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 **Prerequisites:** Phase 4 complete, NixOS MacBook Pro config available
-**Estimated time:** 3–5 sessions
 **Outcome:** Single flake repo managing both machines with shared modules
 
 ## Overview
 
 This phase brings your NixOS MacBook Pro config into the same flake as your Mac mini's nix-darwin config. Shared Home Manager modules (git, shell, editor) are factored out so both machines stay consistent. Machine-specific config stays in separate host directories.
+
+## Current Progress (2026-03-04)
+
+### Already Done
+- [x] NixOS MacBook Pro already in the flake (`nixosConfigurations.mbp2015`)
+- [x] Shared packages consolidated into `users/jasper/common.nix`
+- [x] Darwin-specific packages in `users/jasper/darwin.nix`
+- [x] NixOS-specific packages in `modules/core/default.nix`
+- [x] Removed duplicate packages from `modules/core` (now in common.nix via Home Manager)
+
+### Remaining
+- [ ] Test rebuild on mbp2015 to verify shared config works
+- [ ] Handle any platform-specific issues discovered during testing
+- [ ] macOS defaults (deferred from Phase 4)
 
 ## Target Repository Structure
 
@@ -39,34 +52,32 @@ nix-config/
 
 ### Migrate NixOS Config to Flakes
 
-Your MacBook Pro currently uses channels. To bring it into the shared flake:
+~~Your MacBook Pro currently uses channels.~~ **ALREADY DONE** — mbp2015 is already in the flake.
 
-- [ ] Copy current NixOS config files into `hosts/macbook-pro/` in the shared repo
-- [ ] Adapt them to work as flake modules (remove channel references, use `inputs.nixpkgs`)
-- [ ] Add `nixosConfigurations.macbook-pro` to `flake.nix`:
-  ```nix
-  nixosConfigurations."macbook-pro" = nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";  # Intel MacBook Pro
-    modules = [
-      ./hosts/macbook-pro/configuration.nix
-
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.jasper = import ./hosts/macbook-pro/home.nix;
-      }
-    ];
-  };
-  ```
-- [ ] Test on the MacBook Pro: `sudo nixos-rebuild switch --flake .#macbook-pro`
-- [ ] Verify everything works identically to the channel-based setup
-- [ ] Commit
+- [x] NixOS config in `hosts/mbp2015/`
+- [x] `nixosConfigurations.mbp2015` in `flake.nix`
+- [ ] Test rebuild after package consolidation: `sudo nixos-rebuild switch --flake .#mbp2015`
+- [ ] Verify no regressions
 
 ### Factor Out Shared Home Manager Modules
 
-- [ ] Identify Home Manager config that's identical on both machines
-- [ ] Extract into `modules/home/`:
+**DONE** — Packages consolidated into `users/jasper/common.nix`:
+
+- [x] Shared CLI tools (git, neovim, fzf, ripgrep, etc.)
+- [x] Shared GUI apps (claude-code, obsidian, vscode, discord, zed-editor)
+- [x] Shared fonts (nerd-fonts.meslo-lg)
+- [x] Darwin-only packages stay in `darwin.nix`
+- [x] NixOS-only packages stay in `modules/core/default.nix`
+
+Current structure:
+```
+users/jasper/
+├── common.nix      # Shared packages + program configs (zsh, git, tmux, etc.)
+├── darwin.nix      # Darwin-only (aerospace, google-chrome, etc.) + imports common.nix
+└── nixos.nix       # NixOS-only (Hyprland configs) + imports common.nix
+```
+
+~~- [ ] Extract into `modules/home/`:~~
   ```nix
   # modules/home/git.nix
   { config, pkgs, ... }:

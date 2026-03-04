@@ -1,13 +1,12 @@
 # Phase 4: Introduce nix-darwin
 
-**Status:** `IN_PROGRESS`
+**Status:** `DONE`
 **Prerequisites:** Phases 2 and 3 complete (Home Manager running with packages and dotfiles)
-**Estimated time:** 2–4 sessions
 **Outcome:** System-level macOS config managed declaratively via nix-darwin, with Home Manager integrated as a module
 
 ---
 
-## Current Progress (2026-03-02)
+## Final State (2026-03-04)
 
 ### Completed
 
@@ -15,42 +14,63 @@
 - [x] Create `hosts/mini/default.nix` with: `system.stateVersion = 6`, nix settings, GC (weekly launchd), `programs.zsh.enable`, `system.primaryUser`, `users.users.jasper.home`, `networking.hostName`, unfree packages via `modules/nixpkgs.nix`
 - [x] Bootstrap nix-darwin (`nix run nix-darwin -- switch --flake .#mini`)
 - [x] Uncomment `darwinConfigurations.mini` in `flake.nix`, remove standalone `homeConfigurations.jasper`
-- [x] Import `modules/nixpkgs.nix` and consolidate unfree handling (`claude-code`, `keymapp`)
+- [x] Import `modules/nixpkgs.nix` and consolidate unfree handling
 - [x] Migrate HM zsh config: `initExtraFirst`/`initExtra` → `initContent` with `lib.mkMerge`/`lib.mkBefore`
-- [x] Migrate casks to Nix packages: `aerospace`, `claude-code`, `ice-bar`, `stats`, `nerd-fonts.meslo-lg`
-- [x] Add homebrew module for `ghostty` (nixpkgs package is Linux-only, no `aarch64-darwin`)
-- [x] Remove `brew shellenv` and manual Nix PATH hack from zsh `initContent` (nix-darwin manages PATH via `set-environment`)
-- [x] Remove `tfenv` from PATH (replaced by `tenv` in Phase 2)
-- [x] Uninstall migrated Homebrew casks (`aerospace`, `claude-code`, `font-meslo-lg-nerd-font`, `stats`, `jordanbaird-ice`)
 - [x] Fonts managed via Home Manager `home.packages` (installed to `~/Library/Fonts/`)
+- [x] Verify PATH ordering after full reboot
+- [x] Add `borders` and `modular` to homebrew.brews
+- [x] Consolidate shared packages into `users/jasper/common.nix` (moved from darwin.nix)
+- [x] Migrate GUI apps to Nix packages where supported
+- [x] Migrate remaining apps to Homebrew casks (managed by nix-darwin)
+- [x] Remove duplicate packages from `modules/core/default.nix`
+- [x] Update inventory.md
 
-### Remaining
+### Apps Now Under Management
 
-- [x] **Verify PATH ordering after full reboot** — confirmed in fresh Ghostty window:
-  - Nix paths (`/etc/profiles/per-user/jasper/bin`, `/run/current-system/sw/bin`) before system paths
-  - `/opt/homebrew/bin` added via `home.sessionPath` in `darwin.nix`
-  - No duplicate PATH entries
-  - `which claude` → `/etc/profiles/per-user/jasper/bin/claude`
-  - `which borders` → `/opt/homebrew/bin/borders`
-  - NVM, luarocks, modular all work
-- [x] **Add `borders` and `modular` to homebrew.brews** — added to `hosts/mini/default.nix`
-- [x] **Update inventory.md** — marked migrated formulas and casks as MIGRATED
-- [ ] **Commit and push all changes**
-- [ ] **Manage macOS defaults** — DEFERRED to after Phase 5 (cosmetic, lower priority than package consolidation)
-- [ ] **Consider `homebrew.onActivation.cleanup = "zap"`** — DEFERRED until confident all casks/brews are declared
+**Nix packages (13 apps in ~/Applications/Home Manager Apps/):**
+- AeroSpace, Discord, Google Chrome, GrandPerspective, Ice, Keymapp, Obsidian, Postman, Stats, VS Code, Wireshark, Zed, zoom.us
+
+**Homebrew casks (15 apps, managed by nix-darwin):**
+- calibre, docker, element, freecad, ghostty, gimp, notion, pdfsam-basic, protonvpn, raspberry-pi-imager, sqlectron, steam, teamviewer-host, vnc-viewer, whatsapp
+
+**Homebrew formulas (2, no nixpkgs equivalent):**
+- borders, modular
+
+### Deferred
+
+- [ ] **Manage macOS defaults** — cosmetic, lower priority
+- [ ] **Consider `homebrew.onActivation.cleanup = "zap"`** — once confident all casks/brews are declared
 
 ## Gotchas Discovered
 
+### nix-darwin Setup
 - `services.nix-daemon.enable` was removed in nix-darwin — daemon is managed automatically when `nix.enable = true` (default)
 - `nix.settings.auto-optimise-store` is blocked on macOS (corrupts store) — use `nix.optimise.automatic = true` instead
 - `system.stateVersion` in nix-darwin is an integer (not a string like NixOS) — use `6` for fresh installs on 25.11
 - `system.primaryUser` is required for `homebrew.enable` (nix-darwin multi-user migration)
 - `users.users.jasper.home` must be set for Home Manager integration (HM derives `home.homeDirectory` from it)
 - nix-darwin `master` branch moved to 26.05 — must pin to `nix-darwin-25.11` to match `nixpkgs-25.11-darwin`
-- Ghostty nixpkg is Linux-only (`meta.platforms` does not include `aarch64-darwin`) — must stay as Homebrew cask
-- nix-darwin's `set-environment` script (sourced from `/etc/zshenv`) sets the canonical PATH ordering: `~/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:/nix/var/nix/profiles/default/bin:...`
 - Bootstrap requires `sudo` and `--extra-experimental-features "nix-command flakes"` after moving `/etc/nix/nix.conf`
 - First bootstrap requires renaming `/etc/nix/nix.conf`, `/etc/bashrc`, `/etc/zshrc` to `*.before-nix-darwin`
+
+### PATH Management
+- nix-darwin's `set-environment` script (sourced from `/etc/zshenv`) sets the canonical PATH ordering
+- tmux inherits PATH from the shell that started it — kill tmux server and relaunch after PATH changes to verify
+- Add `/opt/homebrew/bin` to `home.sessionPath` for Homebrew formula access (borders, modular)
+
+### Packages Broken/Unavailable on Darwin (use Homebrew cask instead)
+- `calibre` — marked broken in nixpkgs for darwin
+- `element-desktop` — build fails (requires Xcode access in sandbox)
+- `ghostty` — Linux-only in nixpkgs
+- `gimp` — Linux-only in nixpkgs
+- `freecad`, `notion`, `protonvpn`, `steam`, `whatsapp`, etc. — not packaged for darwin
+
+### Unfree Package Names
+- `zoom-us` package requires `"zoom"` in allowedUnfreePackages (not `"zoom-us"`)
+
+### Homebrew Cask Adoption
+- If an app exists in /Applications with a different version, `brew bundle` fails with version mismatch
+- Delete old app first, then rebuild to let Homebrew install fresh
 
 ## Reference
 
