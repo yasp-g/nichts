@@ -29,7 +29,6 @@
 
       # Darwin-only GUI apps
       aerospace
-      gimp
       google-chrome
       ice-bar
       postman

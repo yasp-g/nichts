@@ -61,6 +61,7 @@
     ];
     casks = [
       "ghostty"
+      "gimp"
     ];
   };
 }
