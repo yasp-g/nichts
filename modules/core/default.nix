@@ -48,6 +48,7 @@
     statix
 
     # GUI apps
+    calibre
     firefox
     ghostty
     libreoffice

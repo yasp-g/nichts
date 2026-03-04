@@ -31,7 +31,6 @@
     keymapp
 
     # GUI apps
-    calibre
     claude-code
     discord
     element-desktop
