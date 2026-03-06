@@ -40,4 +40,7 @@
 
   # AeroSpace — macOS-only tiling window manager
   xdg.configFile."aerospace/aerospace.toml".source = ./darwin/aerospace/aerospace.toml;
+
+  # SSH — macOS-specific option (base config is in common.nix)
+  programs.ssh.matchBlocks."*".extraOptions.UseKeychain = "yes";
 }

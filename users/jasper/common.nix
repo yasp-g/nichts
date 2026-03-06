@@ -56,13 +56,12 @@
     recursive = true;
   };
 
-  # SSH
+  # SSH (base config; macOS adds UseKeychain in darwin.nix)
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
     matchBlocks."*" = {
       addKeysToAgent = "yes";
-      extraOptions.UseKeychain = "yes";
       identityFile = "~/.ssh/id_rsa";
     };
   };
