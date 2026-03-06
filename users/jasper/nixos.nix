@@ -14,6 +14,9 @@ in
     stateVersion = "25.11"; # Do not change after initial setup
   };
 
+  # SSH agent — cache key passphrase for the session
+  services.ssh-agent.enable = true;
+
   # Config files - merge themed modules
   xdg.configFile = {
     "hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
