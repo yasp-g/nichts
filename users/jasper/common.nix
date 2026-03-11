@@ -8,28 +8,28 @@
     # Essentials
     git
     neovim
-    fzf
-    ripgrep
+    fzf              # fuzzy finder
+    ripgrep          # fast grep
     tree
-    rsync
-    neofetch
+    rsync            # file sync
+    neofetch         # system info
 
     # Daily-use tools
-    chafa
-    ffmpeg
-    glow
-    gnupg
-    gtt
-    opencode
-    tenv
-    trash-cli
-    uv
-    yazi
+    chafa            # image to terminal
+    ffmpeg           # media converter
+    glow             # cli markdown reader
+    gnupg            # encryption
+    gtt              # translation tui
+    opencode         # ai coding assistant
+    tenv             # terraform version manager
+    trash-cli        # safe delete
+    uv               # python package manager
+    yazi             # file manager
 
     # Dev/specialty tools
     exercism
-    luarocks
-    keymapp
+    luarocks         # lua package manager
+    keymapp          # zsa keyboard config
 
     # GUI apps
     claude-code

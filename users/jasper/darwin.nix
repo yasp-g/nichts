@@ -14,26 +14,26 @@
 
     packages = with pkgs; [
       # Darwin-only daily tools
-      imagemagick
-      kubectl
+      imagemagick      # image manipulation
+      kubectl          # kubernetes cli
 
       # Darwin-only dev/specialty tools
-      cabal-install
-      cmake
-      git-filter-repo
-      haskell-language-server
-      stack
-      lynx
-      pandoc
-      wireshark
+      cabal-install    # haskell build tool
+      cmake            # build system
+      git-filter-repo  # git history rewriter
+      haskell-language-server  # haskell lsp
+      stack            # haskell build tool
+      lynx             # text browser
+      pandoc           # document converter
+      wireshark        # network analyzer
 
       # Darwin-only GUI apps
       aerospace  # Pulled from nixpkgs-unstable via overlay (stable is outdated)
       google-chrome
-      grandperspective
-      ice-bar
-      postman
-      stats
+      grandperspective # disk usage
+      ice-bar          # menu bar manager
+      postman          # api client
+      stats            # system monitor
       zoom-us
     ];
   };

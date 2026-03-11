@@ -15,15 +15,15 @@ in
     packages = with pkgs; [
       # System utilities
       vim
-      wget
+      wget             # downloader
 
       # Nix tooling
-      nil
-      statix
+      nil              # nix lsp
+      statix           # nix linter
 
       # GUI apps
-      breitbandmessung
-      calibre
+      breitbandmessung # german speed test
+      calibre          # ebook manager
       firefox
       ghostty
       libreoffice
