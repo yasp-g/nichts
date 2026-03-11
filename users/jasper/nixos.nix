@@ -13,7 +13,20 @@ in
     homeDirectory = "/home/jasper";
     stateVersion = "25.11"; # Do not change after initial setup
     packages = with pkgs; [
+      # System utilities
+      vim
+      wget
+
+      # Nix tooling
+      nil
+      statix
+
+      # GUI apps
       breitbandmessung
+      calibre
+      firefox
+      ghostty
+      libreoffice
     ];
   };
 

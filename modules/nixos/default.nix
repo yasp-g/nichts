@@ -43,20 +43,4 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" ];
   };
-
-  # Base packages (NixOS system-level only; shared packages are in users/jasper/common.nix)
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-
-    # Nix tooling
-    nil
-    statix
-
-    # GUI apps
-    calibre
-    firefox
-    ghostty
-    libreoffice
-  ];
 }
