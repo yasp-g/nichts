@@ -19,6 +19,7 @@
     ffmpeg
     glow
     gnupg
+    gtt
     opencode
     tenv
     trash-cli
