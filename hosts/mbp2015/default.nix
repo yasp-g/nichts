@@ -4,7 +4,7 @@
 {
   imports = [
     ./hardware.nix
-    ../../modules/core
+    ../../modules/nixos
     ../../modules/desktop/hyprland.nix
   ];
 

@@ -1,4 +1,4 @@
-# Core system configuration shared across all hosts
+# NixOS system configuration (mbp2015 and future Linux hosts)
 { config, lib, pkgs, ... }:
 
 {
@@ -19,7 +19,7 @@
     };
   };
 
-  # Unfree packages needed across all hosts
+  # Unfree packages needed on NixOS hosts
   allowedUnfreePackages = [
     "claude-code"
     "discord"
