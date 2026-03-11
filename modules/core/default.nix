@@ -27,6 +27,11 @@
     "obsidian"
     "vscode"
   ];
+  # Sudo — cache credentials for 15 minutes
+  security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=15
+  '';
+
   # Timezone
   time.timeZone = "Europe/Berlin";
 

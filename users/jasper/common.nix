@@ -62,7 +62,6 @@
     enableDefaultConfig = false;
     matchBlocks."*" = {
       addKeysToAgent = "yes";
-      identityFile = "~/.ssh/id_rsa";
     };
   };
 
