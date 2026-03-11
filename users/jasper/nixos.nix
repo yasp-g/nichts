@@ -12,6 +12,9 @@ in
     username = "jasper";
     homeDirectory = "/home/jasper";
     stateVersion = "25.11"; # Do not change after initial setup
+    packages = with pkgs; [
+      breitbandmessung
+    ];
   };
 
   # SSH agent — cache key passphrase for the session

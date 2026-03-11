@@ -40,7 +40,7 @@
   services.blueman.enable = true;
 
   # Hardware-specific unfree/insecure packages
-  allowedUnfreePackages = [ "broadcom-sta" ];
+  allowedUnfreePackages = [ "broadcom-sta" "breitbandmessung" ];
   allowedInsecurePackages = [ "broadcom-sta" ];  # prefix-matched, survives kernel updates
 
   # Host-specific packages
