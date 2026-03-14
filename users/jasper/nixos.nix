@@ -48,5 +48,17 @@ in
   # Waybar with systemd service for auto-restart
   programs.waybar = import ./hyprland/waybar.nix { inherit theme; };
 
+  # System-wide dark mode for GTK/Electron apps
+  gtk = {
+    enable = true;
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
 
 }
