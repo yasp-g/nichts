@@ -28,7 +28,7 @@
       wireshark
 
       # Darwin-only GUI apps
-      # aerospace  # Using Homebrew cask until nixpkgs is updated (currently 0.19.2, latest 0.20.3)
+      aerospace  # Pulled from nixpkgs-unstable via overlay (stable is outdated)
       google-chrome
       grandperspective
       ice-bar

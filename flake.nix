@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -17,7 +18,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-darwin, home-manager, nix-darwin }: {
+  outputs = { self, nixpkgs, nixpkgs-darwin, nixpkgs-unstable, home-manager, nix-darwin }: {
 
     # NixOS hosts
     nixosConfigurations.mbp2015 = nixpkgs.lib.nixosSystem {
@@ -42,6 +43,12 @@
         ./hosts/mini
         home-manager.darwinModules.home-manager
         {
+          # Overlay: pull specific packages from unstable
+          nixpkgs.overlays = [
+            (final: prev: {
+              aerospace = nixpkgs-unstable.legacyPackages.${prev.system}.aerospace;
+            })
+          ];
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;

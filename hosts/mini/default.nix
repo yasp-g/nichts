@@ -60,7 +60,6 @@
       "modular"   # Mojo/MAX toolchain (no nixpkgs equivalent)
     ];
     casks = [
-      "aerospace"  # TODO: contribute nixpkgs update (0.19.2 -> latest), then switch back to Nix
       "calibre"
       "docker"
       "element"
