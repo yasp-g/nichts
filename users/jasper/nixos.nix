@@ -14,6 +14,7 @@ in
     stateVersion = "25.11"; # Do not change after initial setup
     packages = with pkgs; [
       # System utilities
+      bat              # syntax-highlighted cat/pager
       vim
       wget             # downloader
 
