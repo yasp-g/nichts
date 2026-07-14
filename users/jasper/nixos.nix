@@ -30,6 +30,8 @@ in
       firefox
       ghostty
       libreoffice
+      pavucontrol      # audio mixer GUI (PipeWire/PulseAudio)
+      wlogout          # power menu (lock/logout/suspend/reboot/shutdown)
     ];
   };
 
@@ -41,6 +43,7 @@ in
     "hypr/hyprland.conf".source = ./hyprland/hyprland.conf;
     "hypr/hypridle.conf".source = ./hyprland/hypridle.conf;
     "wallpapers".source = ./hyprland/wallpapers;
+    "wlogout/layout".source = ./hyprland/wlogout/layout;
     "wofi/config".source = ./hyprland/wofi-config;
   }
   // (import ./hyprland/hyprlock.nix { inherit theme; })

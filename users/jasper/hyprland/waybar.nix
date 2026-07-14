@@ -13,13 +13,20 @@
 
       modules-left = [ "hyprland/workspaces" "hyprland/window" ];
       modules-center = [ "clock" ];
-      modules-right = [ "custom/help" "pulseaudio" "bluetooth" "network" "battery" "tray" ];
+      modules-right = [ "custom/help" "pulseaudio" "bluetooth" "network" "battery" "tray" "custom/power" ];
 
       "custom/help" = {
         format = "󰋖";
         tooltip = true;
         tooltip-format = "Alt + / — open cheatsheet";
         on-click = "hyprctl dispatch togglespecialworkspace cheatsheet";
+      };
+
+      "custom/power" = {
+        format = "󰐥";
+        tooltip = true;
+        tooltip-format = "Power menu";
+        on-click = "wlogout";
       };
 
       "hyprland/workspaces" = {
@@ -76,7 +83,7 @@
         format-icons = {
           default = [ "󰕿" "󰖀" "󰕾" ];
         };
-        on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        on-click = "pavucontrol";
       };
 
       bluetooth = {
@@ -135,6 +142,7 @@
     #battery,
     #bluetooth,
     #custom-help,
+    #custom-power,
     #network,
     #pulseaudio,
     #tray {
