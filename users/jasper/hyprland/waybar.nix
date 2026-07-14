@@ -13,7 +13,14 @@
 
       modules-left = [ "hyprland/workspaces" "hyprland/window" ];
       modules-center = [ "clock" ];
-      modules-right = [ "pulseaudio" "bluetooth" "network" "battery" "tray" ];
+      modules-right = [ "custom/help" "pulseaudio" "bluetooth" "network" "battery" "tray" ];
+
+      "custom/help" = {
+        format = "󰋖";
+        tooltip = true;
+        tooltip-format = "Alt + / — open cheatsheet";
+        on-click = "hyprctl dispatch togglespecialworkspace cheatsheet";
+      };
 
       "hyprland/workspaces" = {
         format = "{icon}";
@@ -60,6 +67,7 @@
         format-ethernet = "󰈀 {ipaddr}";
         format-disconnected = "󰤭 Disconnected";
         tooltip-format = "{ifname}: {ipaddr}/{cidr}";
+        on-click = "ghostty -e nmtui";
       };
 
       pulseaudio = {
@@ -126,6 +134,7 @@
     #clock,
     #battery,
     #bluetooth,
+    #custom-help,
     #network,
     #pulseaudio,
     #tray {
