@@ -14,9 +14,11 @@
 - **Ctrl + Super + Q**   lock (hyprlock)
 
 ## NixOS rebuild
-    sudo nixos-rebuild switch --flake .#mbp2015
-    nix flake update
-    nix-collect-garbage -d
+```bash
+nix flake update
+sudo nixos-rebuild switch --flake .#mbp2015
+nix-collect-garbage -d
+```
 
 ## Gotchas
 - `git add` new files before rebuild (flakes ignore untracked)
@@ -27,14 +29,20 @@
 Easiest: click the WiFi icon in the topbar → opens `nmtui`.
 
 CLI:
-    nmcli device wifi list                     # scan
-    nmcli device wifi connect <SSID> password <PW>
-    nmcli device wifi connect <SSID> --ask     # prompts for password
-    nmcli connection show                      # saved networks
-    nmcli connection up <name>                 # reconnect saved
-    nmcli connection delete <name>             # forget
-    nmcli radio wifi off / on                  # toggle radio
-    nmcli device status                        # all interfaces
+```bash
+nmcli radio wifi on                     # ensure radio on
+nmcli device wifi rescan                # force fresh scan
+nmcli device wifi list                  # show scan results
+nmcli device wifi connect <SSID> password <PW>
+nmcli device wifi connect <SSID> --ask  # prompts for password
+nmcli device wifi connect "SSID with spaces" --ask
+nmcli connection show                   # saved networks
+nmcli connection up <name>              # reconnect saved
+nmcli connection delete <name>          # forget
+nmcli radio wifi off / on               # toggle radio
+nmcli device status                     # all interfaces
+ip route                                # verify default gateway
+```
 
 Captive portal: after `connect`, open http://neverssl.com in firefox.
 
@@ -42,21 +50,25 @@ Captive portal: after `connect`, open http://neverssl.com in firefox.
 GUI: click the BT icon in the topbar → blueman-manager.
 
 CLI (`bluetoothctl`):
-    power on
-    agent on
-    default-agent
-    scan on                     # find devices
-    devices                     # list found (grab MAC)
-    pair   AA:BB:CC:DD:EE:FF
-    trust  AA:BB:CC:DD:EE:FF
-    connect AA:BB:CC:DD:EE:FF
-    scan off
-    exit
+```
+power on
+agent on
+default-agent
+scan on                     # find devices
+devices                     # list found (grab MAC)
+pair   AA:BB:CC:DD:EE:FF
+trust  AA:BB:CC:DD:EE:FF
+connect AA:BB:CC:DD:EE:FF
+scan off
+exit
+```
 
 Reconnect a paired device: `bluetoothctl connect <MAC>`
 List paired: `bluetoothctl devices Paired`
 
 ## Audio (PipeWire)
-    wpctl status                          # sinks/sources
-    wpctl set-default <id>                # switch output
-    Volume/mute keys work natively
+```bash
+wpctl status                          # sinks/sources
+wpctl set-default <id>                # switch output
+```
+Volume/mute keys work natively.
