@@ -64,3 +64,23 @@ flake.nix                    # Entry point defining all hosts
 ## Secrets
 
 Secrets are gitignored (`secrets/`, `*.key`, `*.pem`). Never commit credentials.
+
+## Future: Unstable Package Candidates
+
+Currently using `nixos-25.11` (stable) for everything. These fast-moving packages are candidates for pulling from `nixpkgs-unstable` via overlay (like `aerospace` on darwin):
+
+**High priority:**
+- `claude-code`, `opencode` — AI tools with frequent updates
+- `neovim`, `zed-editor`, `ghostty` — actively developed editors/terminal
+- `uv` — Astral's Python manager, very active
+- `yazi` — file manager with frequent features
+- `nil`, `statix` — Nix LSP/linter, track latest Nix features
+- `tenv` — needs to track latest Terraform releases
+
+**Medium priority:**
+- `vscode` — monthly releases, extension compatibility
+- `ripgrep`, `fzf` — regular optimizations
+- `ffmpeg` — new codecs
+- `gtt` — translation API updates
+
+**Leave on stable:** Desktop/Hyprland stack, system utilities, fonts, large GUI apps (firefox, libreoffice), hardware-related packages.
