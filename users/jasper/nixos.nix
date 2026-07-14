@@ -14,7 +14,9 @@ in
     stateVersion = "25.11"; # Do not change after initial setup
     packages = with pkgs; [
       # System utilities
-      bat              # syntax-highlighted cat/pager
+      # bat            # syntax-highlighted cat/pager — trialed as alt pager for the
+                       # cheatsheet scratchpad (see hyprland.conf). glow won out for
+                       # rendered look; keep commented in case we want to swap back.
       vim
       wget             # downloader
 
