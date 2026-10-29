@@ -17,6 +17,7 @@ in
       # bat            # syntax-highlighted cat/pager — trialed as alt pager for the
                        # cheatsheet scratchpad (see hyprland.conf). glow won out for
                        # rendered look; keep commented in case we want to swap back.
+      gtt              # translation tui (Linux-only: pulls alsa-lib/xclip/wl-clipboard)
       vim
       wget             # downloader
 

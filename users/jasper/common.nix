@@ -19,7 +19,6 @@
     ffmpeg           # media converter
     glow             # cli markdown reader
     gnupg            # encryption
-    gtt              # translation tui
     opencode         # ai coding assistant
     tenv             # terraform version manager
     trash-cli        # safe delete
