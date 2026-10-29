@@ -62,7 +62,7 @@
     casks = [
       "calibre"
       "claude"
-      "docker"
+      "docker-desktop"
       "element"
       "freecad"
       "ghostty"
@@ -74,7 +74,7 @@
       "sqlectron"
       "steam"
       "teamviewer-host"
-      "vnc-viewer"
+      "realvnc-connect-viewer"
       "whatsapp"
       "zen"
     ];

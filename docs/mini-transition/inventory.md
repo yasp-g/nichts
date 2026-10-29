@@ -84,7 +84,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 | Cask | Notes |
 |------|-------|
 | `calibre` | Ebook management — nixpkgs broken on darwin |
-| `docker` | Docker Desktop |
+| `docker-desktop` | Docker Desktop (renamed from `docker` upstream) |
 | `element` | Matrix client — nixpkgs build fails on darwin |
 | `freecad` | 3D CAD — not in nixpkgs for darwin |
 | `gimp` | Image editor — nixpkgs Linux-only |
@@ -95,7 +95,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 | `sqlectron` | SQL client — not in nixpkgs |
 | `steam` | Gaming — nixpkgs Linux-only |
 | `teamviewer-host` | Remote access — not in nixpkgs |
-| `vnc-viewer` | Remote desktop — not in nixpkgs |
+| `realvnc-connect-viewer` | Remote desktop (renamed from `vnc-viewer` upstream) |
 | `whatsapp` | Messaging — not in nixpkgs |
 
 **Total:** 15 Homebrew casks managed by nix-darwin.
@@ -130,7 +130,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 |-------------|-----------|-------|
 | calibre | `calibre` | Ebook management |
 | Claude | `claude` | AI assistant desktop app |
-| Docker | `docker` | Containers |
+| Docker | `docker-desktop` | Containers |
 | Element | `element` | Matrix client |
 | FreeCAD | `freecad` | 3D CAD |
 | Ghostty | `ghostty` | Terminal |
@@ -142,7 +142,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization �
 | sqlectron | `sqlectron` | SQL client |
 | Steam | `steam` | Gaming |
 | TeamViewerHost | `teamviewer-host` | Remote access |
-| VNC Viewer | `vnc-viewer` | Remote desktop |
+| VNC Viewer | `realvnc-connect-viewer` | Remote desktop |
 | WhatsApp | `whatsapp` | Messaging |
 | Zen | `zen` | Firefox-based browser |
 
