@@ -218,6 +218,11 @@ up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
 
 # APP WORKSPACE AND FLOATING ASSIGNMENTS
+# LLM Chatbot / AI apps
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace A'
+
 # Code editor apps
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
@@ -253,6 +258,9 @@ if.app-id = 'company.thebrowser.Browser'
 run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
+run = 'layout floating'
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.dia'
 run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.operasoftware.Opera'
