@@ -61,6 +61,7 @@
     ];
     casks = [
       "calibre"
+      "claude"
       "docker"
       "element"
       "freecad"
