@@ -129,6 +129,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization â
 | Application | Cask name | Notes |
 |-------------|-----------|-------|
 | calibre | `calibre` | Ebook management |
+| Claude | `claude` | AI assistant desktop app |
 | Docker | `docker` | Containers |
 | Element | `element` | Matrix client |
 | FreeCAD | `freecad` | 3D CAD |
@@ -143,6 +144,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization â
 | TeamViewerHost | `teamviewer-host` | Remote access |
 | VNC Viewer | `vnc-viewer` | Remote desktop |
 | WhatsApp | `whatsapp` | Messaging |
+| Zen | `zen` | Firefox-based browser |
 
 ### Manual installs (remaining in /Applications/)
 
@@ -154,7 +156,7 @@ Only **leaf packages** (not dependencies of anything else) need categorization â
 | Be Focused | Unknown | Pomodoro timer â€” user kept |
 | DeepL | Direct download | Translation tool â€” no nixpkgs/cask |
 | Developer | Mac App Store | Apple Developer resources |
-| Dia | Direct download | Diagram tool â€” user kept |
+| Dia | Direct download | AI browser (invite-only) â€” no nixpkgs/cask |
 | DisplayLink Manager | Direct download | Hardware driver |
 | logioptionsplus | Direct download | Hardware driver (Logitech) |
 | Microsoft Excel/PowerPoint/Word/Teams | Mac App Store | Office suite |
