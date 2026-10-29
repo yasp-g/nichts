@@ -46,7 +46,7 @@
           # Overlay: pull specific packages from unstable
           nixpkgs.overlays = [
             (final: prev: {
-              aerospace = nixpkgs-unstable.legacyPackages.${prev.system}.aerospace;
+              aerospace = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.aerospace;
             })
           ];
           home-manager = {
