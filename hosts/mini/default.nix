@@ -76,6 +76,7 @@
       "teamviewer-host"
       "vnc-viewer"
       "whatsapp"
+      "zen"
     ];
   };
 }
