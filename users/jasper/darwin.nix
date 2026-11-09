@@ -9,11 +9,11 @@
     homeDirectory = "/Users/jasper";
     stateVersion = "25.11"; # Do not change after initial setup
 
-    # Homebrew binaries (borders, modular, etc.)
-    sessionPath = [ "/opt/homebrew/bin" ];
-
-    # `uv` binaries (esphome, etc.)
-    sessionPath = [ "$HOME/.local/bin" ];
+    # Extra PATH entries: Homebrew binaries + uv-installed tools
+    sessionPath = [
+      "/opt/homebrew/bin"
+      "${config.home.homeDirectory}/.local/bin"
+    ];
 
     packages = with pkgs; [
       # Darwin-only daily tools
