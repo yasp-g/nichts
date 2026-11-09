@@ -12,6 +12,9 @@
     # Homebrew binaries (borders, modular, etc.)
     sessionPath = [ "/opt/homebrew/bin" ];
 
+    # `uv` binaries (esphome, etc.)
+    sessionPath = [ "$HOME/.local/bin" ];
+
     packages = with pkgs; [
       # Darwin-only daily tools
       imagemagick      # image manipulation
